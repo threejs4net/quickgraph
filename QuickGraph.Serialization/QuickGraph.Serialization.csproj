@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DirectedGraphMLAlgorithm.cs" />
+    <Compile Remove="DirectedGraphMLExtensions.cs" />
+    <Compile Remove="GraphMLDeserializer.cs" />
+    <Compile Remove="GraphMLExtensions.cs" />
+    <Compile Remove="GraphMLSerializer.cs" />
+    <Compile Remove="GraphMLXmlResolver.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="graphml-structure.xsd" />
+    <None Remove="graphml.dtd" />
+    <None Remove="graphml.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuickGraph\QuickGraph.csproj" />
+  </ItemGroup>
+
+</Project>
