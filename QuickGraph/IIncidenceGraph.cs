@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Contracts;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {
+#if CTR        
     [ContractClass(typeof(IIncidenceGraphContract<,>))]
+#endif
     public interface IIncidenceGraph<TVertex, TEdge> 
         : IImplicitGraph<TVertex,TEdge>
         where TEdge : IEdge<TVertex>

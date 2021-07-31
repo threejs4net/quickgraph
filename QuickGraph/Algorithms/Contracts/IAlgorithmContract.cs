@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IAlgorithm<>))]
+#endif
     abstract class IAlgorithmContract<TGraph>
         : IAlgorithm<TGraph>
     {
@@ -16,8 +20,9 @@ namespace QuickGraph.Algorithms.Contracts
         {
             get 
             {
+#if CTR
                 Contract.Ensures(Contract.Result<TGraph>() != null);
-
+#endif
                 return default(TGraph);
             }
         }

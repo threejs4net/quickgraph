@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 using System.Linq;
 
@@ -38,8 +40,9 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             IDictionary<TVertex, int> components)
             : base(host, visitedGraph)
         {
+#if CTR
             Contract.Requires(components != null);
-
+#endif
             this.components = components;
         }
 
@@ -63,9 +66,11 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
         protected override void  InternalCompute()
         {
+#if CTR
             Contract.Ensures(0 <= this.ComponentCount && this.ComponentCount <= this.VisitedGraph.VertexCount);
             Contract.Ensures(Enumerable.All(this.VisitedGraph.Vertices,
                 v => 0 <= this.Components[v] && this.Components[v] < this.ComponentCount));
+#endif
 
             // shortcut for empty graph
             if (this.VisitedGraph.IsVerticesEmpty)
@@ -147,7 +152,9 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             if(otherComponent != this.currentComponent)
             {
                 this.componentCount--;
+#if CTR
                 Contract.Assert(this.componentCount > 0);
+#endif
                 if (this.currentComponent > otherComponent)
                 {
                     this.componentEquivalences[this.currentComponent] = otherComponent;

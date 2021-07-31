@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Collections
 {
@@ -71,8 +73,10 @@ namespace QuickGraph.Collections
 
         public SoftHeap(double maximumErrorRate, TKey keyMaxValue, Func<TKey, TKey, int> comparison)
         {
+#if CTR
             Contract.Requires(comparison != null);
             Contract.Requires(0 < maximumErrorRate && maximumErrorRate <= 0.5);
+#endif
 
             this.comparison = comparison;
             this.keyMaxValue = keyMaxValue;
@@ -113,7 +117,9 @@ namespace QuickGraph.Collections
 
         public void Add(TKey key, TValue value)
         {
+#if CTR
             Contract.Requires(this.Comparison(key, this.KeyMaxValue) < 0);
+#endif
 
             var l = new Cell(key, value);
             var q = new Node(l);
@@ -124,12 +130,15 @@ namespace QuickGraph.Collections
 
         private void Meld(Node q)
         {
+#if CTR
             Contract.Requires(q != null);
-
+#endif
             Head toHead = header.Next;
             while (q.Rank > toHead.Rank)
             {
+#if CTR
                 Contract.Assert(toHead.Next != null);
+#endif
                 toHead = toHead.Next;
             }
             Head prevHead = toHead.Prev;
@@ -167,8 +176,9 @@ namespace QuickGraph.Collections
 
         private void FixMinLinst(Head h)
         {
+#if CTR
             Contract.Requires(h != null);
-
+#endif
             Head tmpmin;
             if (h.Next == tail)
                 tmpmin = h;
@@ -187,8 +197,9 @@ namespace QuickGraph.Collections
 
         private Node Shift(Node v)
         {
+#if CTR
             Contract.Requires(v != null);
-
+#endif
             v.IL = null;
             v.ILTail = null;
             if (v.Next == null && v.Child == null)
@@ -302,12 +313,16 @@ namespace QuickGraph.Collections
             return new KeyValuePair<TKey, TValue>(min, value);
         }
 
+#if CTR
         [ContractInvariantMethod]
+#endif
         void Invariant()
         {
+#if CTR
             Contract.Invariant(this.count > -1);
             Contract.Invariant(this.header != null);
             Contract.Invariant(this.tail != null);
+#endif
         }
 
         #region IEnumerable<KeyValuePair<TKey,TValue>> Members
@@ -329,7 +344,9 @@ namespace QuickGraph.Collections
 
             public Enumerator(SoftHeap<TKey, TValue> owner)
             {
+#if CTR
                 Contract.Requires(owner != null);
+#endif
                 this.owner = owner;
                 this.current = new KeyValuePair<TKey, TValue>();
             }

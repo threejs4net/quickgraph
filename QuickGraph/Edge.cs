@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+#if CTR        
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph
 {
     /// <summary>
@@ -25,11 +26,12 @@ namespace QuickGraph
         /// <param name="target">The target.</param>
         public Edge(TVertex source, TVertex target)
         {
+#if CTR        
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Ensures(this.Source.Equals(source));
             Contract.Ensures(this.Target.Equals(target));
-
+#endif
             this.source = source;
             this.target = target;
         }

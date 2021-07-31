@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 using QuickGraph.Collections;
 
@@ -17,13 +19,13 @@ namespace QuickGraph
     [Serializable]
 #endif
     [DebuggerDisplay("VertexCount = {VertexCount}, EdgeCount = {EdgeCount}")]
-    public class AdjacencyGraph<TVertex,TEdge> 
-        : IVertexAndEdgeListGraph<TVertex,TEdge>
-        , IEdgeListAndIncidenceGraph<TVertex,TEdge>
-        , IMutableEdgeListGraph<TVertex,TEdge>
-        , IMutableIncidenceGraph<TVertex,TEdge>
-        , IMutableVertexListGraph<TVertex,TEdge>
-        , IMutableVertexAndEdgeListGraph<TVertex,TEdge>
+    public class AdjacencyGraph<TVertex, TEdge>
+        : IVertexAndEdgeListGraph<TVertex, TEdge>
+        , IEdgeListAndIncidenceGraph<TVertex, TEdge>
+        , IMutableEdgeListGraph<TVertex, TEdge>
+        , IMutableIncidenceGraph<TVertex, TEdge>
+        , IMutableVertexListGraph<TVertex, TEdge>
+        , IMutableVertexAndEdgeListGraph<TVertex, TEdge>
 #if !SILVERLIGHT
         , ICloneable
 #endif
@@ -36,28 +38,29 @@ namespace QuickGraph
         private int edgeCapacity = -1;
 
         public AdjacencyGraph()
-            :this(true)
-        {}
+            : this(true)
+        { }
 
         public AdjacencyGraph(bool allowParallelEdges)
-            :this(allowParallelEdges,-1)
+            : this(allowParallelEdges, -1)
         {
         }
 
         public AdjacencyGraph(bool allowParallelEdges, int vertexCapacity)
-            :this(allowParallelEdges, vertexCapacity, -1)
+            : this(allowParallelEdges, vertexCapacity, -1)
         {
         }
 
         public AdjacencyGraph(bool allowParallelEdges, int vertexCapacity, int edgeCapacity)
-            :this(allowParallelEdges, vertexCapacity, edgeCapacity, EqualityComparer<TVertex>.Default)
+            : this(allowParallelEdges, vertexCapacity, edgeCapacity, EqualityComparer<TVertex>.Default)
         {
         }
 
         public AdjacencyGraph(bool allowParallelEdges, int vertexCapacity, int edgeCapacity, IEqualityComparer<TVertex> vertexComparer)
         {
+#if CTR
             Contract.Requires(vertexComparer != null);
-
+#endif
             this.allowParallelEdges = allowParallelEdges;
             if (vertexCapacity > -1)
                 this.vertexEdges = new VertexEdgeDictionary<TVertex, TEdge>(vertexCapacity, vertexComparer);
@@ -67,12 +70,14 @@ namespace QuickGraph
         }
 
         public AdjacencyGraph(
-            bool allowParallelEdges, 
-            int capacity, 
+            bool allowParallelEdges,
+            int capacity,
             int edgeCapacity,
             Func<int, IVertexEdgeDictionary<TVertex, TEdge>> vertexEdgesDictionaryFactory)
         {
+#if CTR
             Contract.Requires(vertexEdgesDictionaryFactory != null);
+#endif
             this.allowParallelEdges = allowParallelEdges;
             this.vertexEdges = vertexEdgesDictionaryFactory(capacity);
             this.edgeCapacity = edgeCapacity;
@@ -85,7 +90,9 @@ namespace QuickGraph
 
         public bool AllowParallelEdges
         {
-            [Pure]
+#if CTR        
+        [`]
+#endif
             get { return this.allowParallelEdges; }
         }
 
@@ -115,7 +122,10 @@ namespace QuickGraph
             get { return this.vertexEdges.Keys; }
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public bool ContainsVertex(TVertex v)
         {
             return this.vertexEdges.ContainsKey(v);
@@ -162,7 +172,10 @@ namespace QuickGraph
         /// </value>
         public bool IsEdgesEmpty
         {
-            [Pure]
+#if CTR        
+        [Pure]
+#endif
+
             get { return this.edgeCount == 0; }
         }
 
@@ -172,16 +185,20 @@ namespace QuickGraph
         /// <value>The edge count.</value>
         public int EdgeCount
         {
-            get 
+            get
             {
-                return this.edgeCount; 
+                return this.edgeCount;
             }
         }
 
+#if CTR
         [ContractInvariantMethod]
+#endif
         void ObjectInvariant()
         {
+#if CTR
             Contract.Invariant(this.edgeCount >= 0);
+#endif
         }
 
         /// <summary>
@@ -190,7 +207,10 @@ namespace QuickGraph
         /// <value>The edges.</value>
         public virtual IEnumerable<TEdge> Edges
         {
-            [Pure]
+#if CTR        
+        [Pure]
+#endif
+
             get
             {
                 foreach (var edges in this.vertexEdges.Values)
@@ -199,7 +219,10 @@ namespace QuickGraph
             }
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             IEnumerable<TEdge> outEdges;
@@ -211,16 +234,22 @@ namespace QuickGraph
             return false;
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public bool ContainsEdge(TEdge edge)
         {
             IEdgeList<TVertex, TEdge> edges;
-            return 
+            return
                 this.vertexEdges.TryGetValue(edge.Source, out edges) &&
                 edges.Contains(edge);
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public bool TryGetEdge(
             TVertex source,
             TVertex target,
@@ -243,7 +272,10 @@ namespace QuickGraph
             return false;
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public virtual bool TryGetEdges(
             TVertex source,
             TVertex target,
@@ -272,8 +304,8 @@ namespace QuickGraph
             if (this.ContainsVertex(v))
                 return false;
 
-            if (this.EdgeCapacity>0)
-                this.vertexEdges.Add(v, new EdgeList<TVertex,TEdge>(this.EdgeCapacity));
+            if (this.EdgeCapacity > 0)
+                this.vertexEdges.Add(v, new EdgeList<TVertex, TEdge>(this.EdgeCapacity));
             else
                 this.vertexEdges.Add(v, new EdgeList<TVertex, TEdge>());
             this.OnVertexAdded(v);
@@ -292,8 +324,9 @@ namespace QuickGraph
         public event VertexAction<TVertex> VertexAdded;
         protected virtual void OnVertexAdded(TVertex args)
         {
-            Contract.Requires(args != null);
-
+#if CTR
+Contract.Requires(args != null);
+#endif
             var eh = this.VertexAdded;
             if (eh != null)
                 eh(args);
@@ -321,7 +354,7 @@ namespace QuickGraph
             {
                 if (kv.Key.Equals(v)) continue; // we've already 
                 // collect edge to remove
-                foreach(var edge in kv.Value)
+                foreach (var edge in kv.Value)
                 {
                     if (edge.Target.Equals(v))
                         edgeToRemove.Add(edge);
@@ -337,8 +370,9 @@ namespace QuickGraph
                 this.edgeCount -= edgeToRemove.Count;
                 edgeToRemove.Clear();
             }
-
+#if CTR
             Contract.Assert(this.edgeCount >= 0);
+#endif
             this.vertexEdges.Remove(v);
             this.OnVertexRemoved(v);
 
@@ -348,7 +382,9 @@ namespace QuickGraph
         public event VertexAction<TVertex> VertexRemoved;
         protected virtual void OnVertexRemoved(TVertex args)
         {
+#if CTR
             Contract.Requires(args != null);
+#endif
 
             var eh = this.VertexRemoved;
             if (eh != null)
@@ -433,7 +469,9 @@ namespace QuickGraph
                 edges.Remove(e))
             {
                 this.edgeCount--;
+#if CTR
                 Contract.Assert(this.edgeCount >= 0);
+#endif
                 this.OnEdgeRemoved(e);
                 return true;
             }
@@ -478,7 +516,7 @@ namespace QuickGraph
         public int RemoveOutEdgeIf(TVertex v, EdgePredicate<TVertex, TEdge> predicate)
         {
             var edges = this.vertexEdges[v];
-            var edgeToRemove = new EdgeList<TVertex,TEdge>(edges.Count);
+            var edgeToRemove = new EdgeList<TVertex, TEdge>(edges.Count);
             foreach (var edge in edges)
                 if (predicate(edge))
                     edgeToRemove.Add(edge);
@@ -522,8 +560,10 @@ namespace QuickGraph
             bool allowParallelEdges
             )
         {
+#if CTR
             Contract.Requires(vertexEdges != null);
             Contract.Requires(edgeCount >= 0);
+#endif
 
             this.vertexEdges = vertexEdges;
             this.edgeCount = edgeCount;
@@ -531,7 +571,10 @@ namespace QuickGraph
             this.allowParallelEdges = allowParallelEdges;
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public AdjacencyGraph<TVertex, TEdge> Clone()
         {
             return new AdjacencyGraph<TVertex, TEdge>(
@@ -541,7 +584,7 @@ namespace QuickGraph
                 this.allowParallelEdges
                 );
         }
-        
+
 #if !SILVERLIGHT
         object ICloneable.Clone()
         {

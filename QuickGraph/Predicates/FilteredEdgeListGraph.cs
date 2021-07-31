@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Predicates
 {
@@ -88,7 +90,9 @@ namespace QuickGraph.Predicates
             }
         }
 
+#if CTR        
         [Pure]
+#endif
         private bool FilterEdge(TEdge edge)
         {
             return this.VertexPredicate(edge.Source)
@@ -96,7 +100,9 @@ namespace QuickGraph.Predicates
                         && this.EdgePredicate(edge);
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool ContainsEdge(TEdge edge)
         {
             return

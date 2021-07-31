@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 
 namespace QuickGraph
@@ -9,7 +11,9 @@ namespace QuickGraph
     /// A mutable vertex set
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
+#if CTR        
     [ContractClass(typeof(IMutableVertexSetContract<>))]
+#endif
     public interface IMutableVertexSet<TVertex>
         : IVertexSet<TVertex>
     {

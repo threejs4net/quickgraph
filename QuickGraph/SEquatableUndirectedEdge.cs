@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
@@ -29,11 +31,13 @@ namespace QuickGraph
         /// <param name="target">The target.</param>
         public SEquatableUndirectedEdge(TVertex source, TVertex target)
         {
+#if CTR        
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Requires(Comparer<TVertex>.Default.Compare(source, target) <= 0);
             Contract.Ensures(Contract.ValueAtReturn(out this).Source.Equals(source));
             Contract.Ensures(Contract.ValueAtReturn(out this).Target.Equals(target));
+#endif
 
             this.source = source;
             this.target = target;
@@ -80,11 +84,13 @@ namespace QuickGraph
         /// </returns>
         public bool Equals(SEquatableUndirectedEdge<TVertex> other)
         {
+#if CTR        
             Contract.Ensures(
                 Contract.Result<bool>() ==
                 (this.Source.Equals(other.Source) &&
                 this.Target.Equals(other.Target))
                 );
+#endif
 
             return
                 this.source.Equals(other.source) &&

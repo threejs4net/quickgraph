@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QuickGraph.Contracts;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -12,7 +14,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
     /// <typeparam name="TEdge"></typeparam>
+#if CTR        
     [ContractClass(typeof(IMutableVertexAndEdgeSetContract<,>))]
+#endif
     public interface IMutableVertexAndEdgeSet<TVertex,TEdge>
         : IEdgeListGraph<TVertex, TEdge>
         , IMutableVertexSet<TVertex>

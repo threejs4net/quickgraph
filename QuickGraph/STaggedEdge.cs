@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
@@ -25,9 +27,10 @@ namespace QuickGraph
 
         public STaggedEdge(TVertex source, TVertex target, TTag tag)
         {
+#if CTR        
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-
+#endif
             this.source = source;
             this.target = target;
             this.tag = tag;

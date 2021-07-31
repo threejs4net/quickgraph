@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {
@@ -39,6 +41,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
             EdgeFactory<TVertex,TEdge> edgeFactory
             )
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
@@ -46,6 +49,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
             Contract.Requires(visitedGraph.ContainsVertex(source));
             Contract.Requires(sink != null);
             Contract.Requires(visitedGraph.ContainsVertex(sink));
+#endif
 
             this.visitedGraph = visitedGraph;
             this.vertexFactory = vertexFactory;
@@ -70,6 +74,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
             TVertex sink,
             IDictionary<TEdge,double> capacities)
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
@@ -78,6 +83,7 @@ namespace QuickGraph.Algorithms.MaximumFlow
             Contract.Requires(sink != null);
             Contract.Requires(visitedGraph.ContainsVertex(sink));
             Contract.Requires(capacities != null);
+#endif
 
             this.visitedGraph = visitedGraph;
             this.source = source;
@@ -210,8 +216,9 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public event EdgeAction<TVertex,TEdge> EdgeAdded;
         private void OnEdgeAdded(TEdge edge)
         {
+#if CTR
             Contract.Requires(edge != null);
-
+#endif
             var eh = this.EdgeAdded;
             if (eh != null)
                 eh(edge);
@@ -219,7 +226,9 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public event VertexAction<TVertex> SurplusVertexAdded;
         private void OnSurplusVertexAdded(TVertex vertex)
         {
+#if CTR
             Contract.Requires(vertex != null);
+#endif
             var eh = this.SurplusVertexAdded;
             if (eh != null)
                 eh(vertex);
@@ -227,8 +236,9 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public event VertexAction<TVertex> DeficientVertexAdded;
         private void OnDeficientVertexAdded(TVertex vertex)
         {
+#if CTR
             Contract.Requires(vertex != null);
-
+#endif
             var eh = this.DeficientVertexAdded;
             if (eh != null)
                 eh(vertex);
@@ -236,7 +246,9 @@ namespace QuickGraph.Algorithms.MaximumFlow
 
         public int GetBalancingIndex(TVertex v)
         {
+#if CTR
             Contract.Requires(v != null);
+#endif
 
             int bi = 0;
             foreach (var edge in this.VisitedGraph.OutEdges(v))

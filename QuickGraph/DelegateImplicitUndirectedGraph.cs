@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -27,8 +29,9 @@ namespace QuickGraph
             TryFunc<TVertex, IEnumerable<TEdge>> tryGetAdjacenyEdges,
             bool allowParallelEdges)
         {
+#if CTR        
             Contract.Requires(tryGetAdjacenyEdges != null);
-
+#endif
             this.tryGetAdjacentEdges = tryGetAdjacenyEdges;
             this.allowParallelEdges = allowParallelEdges;
         }

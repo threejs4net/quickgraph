@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Algorithms.ConnectedComponents
@@ -40,8 +42,9 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 			IDictionary<TVertex,int> components)
             :base(host, g)
 		{
+#if CTR
             Contract.Requires(components != null);
-
+#endif
 			this.components = components;
             this.roots = new Dictionary<TVertex, TVertex>();
             this.discoverTimes = new Dictionary<TVertex, int>();
@@ -119,12 +122,14 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
 		private TVertex MinDiscoverTime(TVertex u, TVertex v)
 		{
+#if CTR
             Contract.Requires(u != null);
             Contract.Requires(v != null);
             Contract.Ensures(this.DiscoverTimes[u] < this.DiscoverTimes[v] 
                 ? Contract.Result<TVertex>().Equals(u) 
                 : Contract.Result<TVertex>().Equals(v)
                 );
+#endif
 
 			if (this.discoverTimes[u] < this.discoverTimes[v])
 				return u;
@@ -134,12 +139,13 @@ namespace QuickGraph.Algorithms.ConnectedComponents
 
 		protected override void InternalCompute()
 		{
+#if CTR
             Contract.Ensures(this.ComponentCount >= 0);
             Contract.Ensures(this.VisitedGraph.VertexCount == 0 || this.ComponentCount > 0); 
             Contract.Ensures(Enumerable.All(this.VisitedGraph.Vertices, v => this.Components.ContainsKey(v)));
             Contract.Ensures(this.VisitedGraph.VertexCount == this.Components.Count);
             Contract.Ensures(Enumerable.All(this.Components.Values, c => c <= this.ComponentCount));
-
+#endif
 			this.Components.Clear();
 			this.Roots.Clear();
 			this.DiscoverTimes.Clear();

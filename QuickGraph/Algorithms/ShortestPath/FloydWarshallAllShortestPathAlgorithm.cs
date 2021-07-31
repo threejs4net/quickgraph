@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Collections;
 using System.Diagnostics;
 using System.IO;
@@ -44,7 +46,9 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             public VertexData(double distance, TEdge edge)
             {
+#if CTR
                 Contract.Requires(edge != null);
+#endif
                 this.Distance = distance;
                 this._predecessor = default(TVertex);
                 this.predecessorStored = false;
@@ -54,8 +58,9 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             public VertexData(double distance, TVertex predecessor)
             {
+#if CTR
                 Contract.Requires(predecessor != null);
-
+#endif
                 this.Distance = distance;
                 this._predecessor = predecessor;
                 this.predecessorStored = true;
@@ -63,11 +68,15 @@ namespace QuickGraph.Algorithms.ShortestPath
                 this.edgeStored = false;
             }
 
+#if CTR
             [ContractInvariantMethod]
+#endif
             void ObjectInvariant()
             {
+#if CTR
                 Contract.Invariant(!this.edgeStored || this._edge != null);
                 Contract.Invariant(!this.predecessorStored || this._predecessor != null);
+#endif
             }
 
             public override string ToString()
@@ -87,9 +96,10 @@ namespace QuickGraph.Algorithms.ShortestPath
             )
             : base(host, visitedGraph)
         {
+#if CTR
             Contract.Requires(weights != null);
             Contract.Requires(distanceRelaxer != null);
-
+#endif
             this.weights = weights;
             this.distanceRelaxer = distanceRelaxer;
             this.data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
@@ -101,9 +111,10 @@ namespace QuickGraph.Algorithms.ShortestPath
             IDistanceRelaxer distanceRelaxer)
             : base(visitedGraph)
         {
+#if CTR
             Contract.Requires(weights != null);
             Contract.Requires(distanceRelaxer != null);
-
+#endif
             this.weights =weights;
             this.distanceRelaxer = distanceRelaxer;
             this.data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
@@ -118,9 +129,10 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         public bool TryGetDistance(TVertex source, TVertex target, out double cost)
         {
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-
+#endif
             VertexData value;
             if (this.data.TryGetValue(new SEquatableEdge<TVertex>(source, target), out value))
             {
@@ -139,9 +151,10 @@ namespace QuickGraph.Algorithms.ShortestPath
             TVertex target,
             out IEnumerable<TEdge> path)
         {
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-
+#endif
             if (source.Equals(target))
             {
                 path = null;
@@ -160,7 +173,9 @@ namespace QuickGraph.Algorithms.ShortestPath
             while (todo.Count > 0)
             {
                 var current = todo.Pop();
+#if CTR
                 Contract.Assert(!current.Source.Equals(current.Target));
+#endif
                 VertexData data;
                 if (this.data.TryGetValue(current, out data))
                 {
@@ -173,14 +188,18 @@ namespace QuickGraph.Algorithms.ShortestPath
                         if (data.TryGetPredecessor(out intermediate))
                         {
 #if DEBUG && !SILVERLIGHT
+#if CTR
                             Contract.Assert(set.Add(intermediate));
+#endif
 #endif
                             todo.Push(new SEquatableEdge<TVertex>(intermediate, current.Target));
                             todo.Push(new SEquatableEdge<TVertex>(current.Source, intermediate));
                         }
                         else
                         {
+#if CTR
                             Contract.Assert(false);
+#endif
                             path = null;
                             return false;
                         }
@@ -194,8 +213,10 @@ namespace QuickGraph.Algorithms.ShortestPath
                 }
             }
 
+#if CTR
             Contract.Assert(todo.Count == 0);
             Contract.Assert(edges.Count > 0);
+#endif
             path = edges.ToArray();
             return true;
         }

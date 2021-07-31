@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Services
 {
@@ -20,8 +22,9 @@ namespace QuickGraph.Algorithms.Services
 
         public AlgorithmServices(IAlgorithmComponent host)
         {
+#if CTR
             Contract.Requires(host != null);
-
+#endif
             this.host = host;
         }
 

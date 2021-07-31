@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
+
 namespace QuickGraph.Predicates
 {
 #if !SILVERLIGHT
@@ -20,7 +23,9 @@ namespace QuickGraph.Predicates
             :base(baseGraph,vertexPredicate,edgePredicate)
         { }
 
+#if CTR        
         [Pure]
+#endif
         public bool ContainsVertex(TVertex vertex)
         {
             return

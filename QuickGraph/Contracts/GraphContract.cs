@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
@@ -19,9 +21,10 @@ namespace QuickGraph.Contracts
             IVertexSet<TVertex> left,
             IVertexSet<TVertex> right)
         {
+#if CTR
             Contract.Requires(left != null);
             Contract.Requires(right != null);
-
+#endif
             return left.VertexCount == right.VertexCount;
         }
 
@@ -34,9 +37,10 @@ namespace QuickGraph.Contracts
             IEdgeListGraph<TVertex, TEdge> right)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(left != null);
             Contract.Requires(right != null);
-
+#endif
             return left.EdgeCount == right.EdgeCount;
         }
 
@@ -45,8 +49,10 @@ namespace QuickGraph.Contracts
             IVertexSet<TVertex> g, 
             TVertex v)
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(v != null);
+#endif
             // todo make requires
             return g.ContainsVertex(v);
         }
@@ -57,8 +63,10 @@ namespace QuickGraph.Contracts
             TEdge e)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(e != null);
+#endif
 
             return InVertexSet<TVertex>(g, e.Source)
                 && InVertexSet<TVertex>(g, e.Target);
@@ -70,9 +78,11 @@ namespace QuickGraph.Contracts
             TEdge e)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(e != null);
-
+#endif
+            
             return InVertexSet(g, e)
                 && g.ContainsEdge(e);
         }

@@ -5,7 +5,9 @@ using System.Text;
 using System.Data;
 using QuickGraph.Graphviz;
 using QuickGraph.Graphviz.Dot;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Data
 {
@@ -43,8 +45,10 @@ namespace QuickGraph.Data
 
         protected virtual void FormatTable(object sender, FormatVertexEventArgs<DataTable> e)
         {
+#if CTR
             Contract.Requires(sender != null);
             Contract.Requires(e != null);
+#endif
 
             var v = e.Vertex;
             var format = e.VertexFormatter;
@@ -75,9 +79,10 @@ namespace QuickGraph.Data
 
         protected virtual void FormatRelationEdge(object sender, FormatEdgeEventArgs<DataTable, DataRelationEdge> args)
         {
+#if CTR
             Contract.Requires(sender != null); 
             Contract.Requires(args != null);
-
+#endif
             var e = args.Edge;
             var format = args.EdgeFormatter;
 

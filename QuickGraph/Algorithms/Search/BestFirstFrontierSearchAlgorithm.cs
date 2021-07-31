@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Algorithms.ShortestPath;
 
 namespace QuickGraph.Algorithms.Search
@@ -32,9 +34,10 @@ namespace QuickGraph.Algorithms.Search
             IDistanceRelaxer distanceRelaxer)
             : base(host, visitedGraph)
         {
+#if CTR
             Contract.Requires(edgeWeights != null);
             Contract.Requires(distanceRelaxer != null);
-
+#endif
             this.edgeWeights = edgeWeights;
             this.distanceRelaxer = distanceRelaxer;
         }
@@ -106,7 +109,9 @@ namespace QuickGraph.Algorithms.Search
                     }
                     else if (hasColor)
                     {
+#if CTR
                         Contract.Assume(edgeColor == GraphColor.Gray);
+#endif
                         // edge already seen, remove it
                         operators.Remove(edge);
                     }

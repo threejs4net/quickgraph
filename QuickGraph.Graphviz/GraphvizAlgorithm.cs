@@ -3,7 +3,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using QuickGraph.Graphviz.Dot;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Graphviz
 {
@@ -35,9 +37,10 @@ namespace QuickGraph.Graphviz
             GraphvizImageType imageType
             )
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(!String.IsNullOrEmpty(path));
-
+#endif
             this.visitedGraph = g;
             this.imageType = imageType;
             this.graphFormat = new GraphvizGraph();
@@ -82,8 +85,9 @@ namespace QuickGraph.Graphviz
             }
             set
             {
+#if CTR
                 Contract.Requires(value != null);
-
+#endif
                 visitedGraph = value;
             }
         }
@@ -202,9 +206,10 @@ namespace QuickGraph.Graphviz
 
         public string Generate(IDotEngine dot, string outputFileName)
         {
+#if CTR
             Contract.Requires(dot != null);
             Contract.Requires(!String.IsNullOrEmpty(outputFileName));
-
+#endif
             var output = this.Generate();
             return dot.Run(ImageType, Output.ToString(), outputFileName);
         }
@@ -213,9 +218,10 @@ namespace QuickGraph.Graphviz
             IDictionary<TVertex,GraphColor> colors,
             IEnumerable<TVertex> vertices)
         {
+#if CTR
             Contract.Requires(colors != null);
             Contract.Requires(vertices != null);
-
+#endif
             foreach (var v in vertices)
             {
                 if (colors[v] == GraphColor.White)
@@ -230,9 +236,10 @@ namespace QuickGraph.Graphviz
             IDictionary<TEdge,GraphColor> edgeColors,
             IEnumerable<TEdge> edges)
         {
+#if CTR
             Contract.Requires(edgeColors != null);
             Contract.Requires(edges != null);
-
+#endif
             foreach (var e in edges)
             {
                 if (edgeColors[e] != GraphColor.White)

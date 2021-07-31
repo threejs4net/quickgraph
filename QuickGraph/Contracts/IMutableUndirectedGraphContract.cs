@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IMutableUndirectedGraph<,>))]
+#endif
     abstract class IMutableUndirectedGraphContract<TVertex, TEdge>
         : IMutableUndirectedGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -18,19 +22,22 @@ namespace QuickGraph.Contracts
             EdgePredicate<TVertex, TEdge> predicate)
         {
             IMutableUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(vertex != null);
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.AdjacentEdges(vertex), e => predicate(e))));
             Contract.Ensures(Enumerable.All(ithis.AdjacentEdges(vertex), v => !predicate(v)));
-
+#endif
             return default(int);
         }
 
         void IMutableUndirectedGraph<TVertex, TEdge>.ClearAdjacentEdges(TVertex vertex)
         {
             IMutableUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(vertex != null);
             Contract.Ensures(ithis.AdjacentDegree(vertex) == 0);
+#endif
         }
         #endregion
 

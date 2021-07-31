@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IIncidenceGraph<,>))]
+#endif
     abstract class IIncidenceGraphContract<TVertex, TEdge>
         : IIncidenceGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -13,11 +17,12 @@ namespace QuickGraph.Contracts
         bool IIncidenceGraph<TVertex, TEdge>.ContainsEdge(TVertex source, TVertex target)
         {
             IIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Requires(ithis.ContainsVertex(source));
             Contract.Requires(ithis.ContainsVertex(target));
-
+#endif
             return default(bool);
         }
 
@@ -27,11 +32,12 @@ namespace QuickGraph.Contracts
             out IEnumerable<TEdge> edges)
         {
             IIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Requires(ithis.ContainsVertex(source));
             Contract.Requires(ithis.ContainsVertex(target));
-
+#endif
             edges = null;
             return default(bool);
         }
@@ -42,11 +48,12 @@ namespace QuickGraph.Contracts
             out TEdge edge)
         {
             IIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Requires(ithis.ContainsVertex(source));
             Contract.Requires(ithis.ContainsVertex(target));
-
+#endif
             edge = default(TEdge);
             return default(bool);
         }

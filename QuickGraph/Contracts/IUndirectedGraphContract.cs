@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IUndirectedGraph<,>))]
+#endif
     abstract class IUndirectedGraphContract<TVertex, TEdge>
         : IUndirectedGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>

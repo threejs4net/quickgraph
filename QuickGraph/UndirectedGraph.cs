@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 using QuickGraph.Collections;
 
@@ -45,9 +47,10 @@ namespace QuickGraph
 
         public UndirectedGraph(bool allowParallelEdges, EdgeEqualityComparer<TVertex, TEdge> edgeEqualityComparer, int vertexCapacity, IEqualityComparer<TVertex> vertexComparer)
         {
+#if CTR
             Contract.Requires(edgeEqualityComparer != null);
             Contract.Requires(vertexComparer != null);
-
+#endif
             this.allowParallelEdges = allowParallelEdges;
             this.edgeEqualityComparer = edgeEqualityComparer;
             if (vertexCapacity > -1)
@@ -60,7 +63,9 @@ namespace QuickGraph
         {
             get
             {
+#if CTR
                 Contract.Ensures(Contract.Result<EdgeEqualityComparer<TVertex, TEdge>>() != null);
+#endif
                 return this.edgeEqualityComparer;
             }
         }
@@ -90,8 +95,9 @@ namespace QuickGraph
         public event VertexAction<TVertex> VertexAdded;
         protected virtual void OnVertexAdded(TVertex args)
         {
+#if CTR
             Contract.Requires(args != null);
-
+#endif
             var eh = this.VertexAdded;
             if (eh != null)
                 eh(args);
@@ -133,8 +139,9 @@ namespace QuickGraph
         public event VertexAction<TVertex> VertexRemoved;
         protected virtual void OnVertexRemoved(TVertex args)
         {
+#if CTR
             Contract.Requires(args != null);
-
+#endif
             var eh = this.VertexRemoved;
             if (eh != null)
                 eh(args);
@@ -177,10 +184,14 @@ namespace QuickGraph
             return edges.Count;
         }
 
+#if CTR
         [ContractInvariantMethod]
+#endif
         void ObjectInvariant()
         {
+#if CTR
             Contract.Invariant(this.edgeCount >= 0);
+#endif
         }
 
         public void ClearAdjacentEdges(TVertex v)
@@ -265,7 +276,9 @@ namespace QuickGraph
         }
 
 
+#if CTR
         [Pure]
+#endif
         public bool ContainsVertex(TVertex vertex)
         {
             return this.adjacentEdges.ContainsKey(vertex);
@@ -348,7 +361,9 @@ namespace QuickGraph
                 if (!EdgeExtensions.IsSelfEdge<TVertex, TEdge>(edge))
                     this.adjacentEdges[edge.Target].Remove(edge);
                 this.edgeCount--;
+#if CTR
                 Contract.Assert(this.edgeCount >= 0);
+#endif
                 this.OnEdgeRemoved(edge);
                 return true;
             }
@@ -428,9 +443,10 @@ namespace QuickGraph
 
         private bool ContainsEdgeBetweenVertices(IEnumerable<TEdge> edges, TEdge edge)
         {
+#if CTR
             Contract.Requires(edges != null);
             Contract.Requires(edge != null);
-
+#endif
             var source = edge.Source;
             var target= edge.Target;
             foreach (var e in edges)

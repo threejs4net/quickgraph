@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 
 namespace QuickGraph
@@ -11,7 +13,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">The type of the vertex.</typeparam>
     /// <typeparam name="TEdge">The type of the edge.</typeparam>
+#if CTR        
     [ContractClass(typeof(IBidirectionalGraphContract<,>))]
+#endif
     public interface IBidirectionalGraph<TVertex,TEdge> 
         : IVertexAndEdgeListGraph<TVertex,TEdge>
         , IBidirectionalIncidenceGraph<TVertex, TEdge>

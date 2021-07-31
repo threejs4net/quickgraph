@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Graphviz.Dot
 {
@@ -24,9 +26,10 @@ namespace QuickGraph.Graphviz.Dot
 
         public GraphvizSizeF(float width, float height)
         {
+#if CTR
             Contract.Requires(width >= 0);
             Contract.Requires(height >= 0);
-
+#endif
             this.width = width;
             this.height = height;
         }
@@ -59,9 +62,10 @@ namespace QuickGraph.Graphviz.Dot
 
         public GraphvizSize(int width, int height)
         {
+#if CTR
             Contract.Requires(width >= 0);
             Contract.Requires(height >= 0);
-
+#endif
             this.width = width;
             this.height = height;
         }

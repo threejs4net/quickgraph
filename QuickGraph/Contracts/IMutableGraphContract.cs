@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IMutableGraph<,>))]
+#endif
     abstract class IMutableGraphContract<TVertex, TEdge>
         : IMutableGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>

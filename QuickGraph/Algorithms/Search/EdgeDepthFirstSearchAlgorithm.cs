@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph.Algorithms.Search
 {
     /// <summary>
@@ -48,8 +49,9 @@ namespace QuickGraph.Algorithms.Search
             )
             :base(host, visitedGraph)
         {
+#if CTR
             Contract.Requires(colors != null);
-
+#endif
             this.colors = colors;
         }
 

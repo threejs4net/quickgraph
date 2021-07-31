@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms
 {
@@ -9,20 +11,22 @@ namespace QuickGraph.Algorithms
         public static TVertex GetVertex<TVertex,TEdge>(IVertexListGraph<TVertex,TEdge> g, Random rnd)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(rnd != null);
             Contract.Requires(g.VertexCount > 0);
-
+#endif
             return GetVertex<TVertex,TEdge>(g.Vertices, g.VertexCount, rnd);
         }
 
         public static TVertex GetVertex<TVertex,TEdge>(IEnumerable<TVertex> vertices, int count, Random rnd)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(vertices != null);
             Contract.Requires(rnd != null);
             Contract.Requires(count > 0);
-
+#endif
             int i = rnd.Next(count);
             foreach (var v in vertices)
             {
@@ -39,10 +43,11 @@ namespace QuickGraph.Algorithms
         public static TEdge GetEdge<TVertex, TEdge>(IEdgeSet<TVertex, TEdge> g, Random rnd)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(rnd != null);
             Contract.Requires(g.EdgeCount > 0);
-
+#endif
             int i = rnd.Next(g.EdgeCount);
             foreach (var e in g.Edges)
             {
@@ -59,10 +64,11 @@ namespace QuickGraph.Algorithms
         public static TEdge GetEdge<TVertex,TEdge>(IEnumerable<TEdge> edges, int count, Random rnd)
             where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(edges != null);
             Contract.Requires(rnd != null);
             Contract.Requires(count > 0);
-
+#endif
             int i = rnd.Next(count);
             foreach (var e in edges)
             {
@@ -86,6 +92,7 @@ namespace QuickGraph.Algorithms
             bool selfEdges
             ) where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
@@ -96,6 +103,7 @@ namespace QuickGraph.Algorithms
                 !(!g.AllowParallelEdges && !selfEdges) ||
                 edgeCount <= vertexCount * (vertexCount -1) // directed graph
                 );
+#endif
 
             var vertices = new TVertex[vertexCount];
             for (int i = 0; i < vertexCount; ++i)
@@ -129,6 +137,7 @@ namespace QuickGraph.Algorithms
             bool selfEdges
             ) where TEdge : IEdge<TVertex>
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
@@ -139,7 +148,7 @@ namespace QuickGraph.Algorithms
                 !(!g.AllowParallelEdges && !selfEdges) ||
                 edgeCount <= vertexCount * (vertexCount - 1) / 2
                 );
-
+#endif
             var vertices = new TVertex[vertexCount];
             for (int i = 0; i < vertexCount; ++i)
                 g.AddVertex(vertices[i] = vertexFactory());

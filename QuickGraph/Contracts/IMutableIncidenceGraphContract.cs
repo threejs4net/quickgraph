@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IMutableIncidenceGraph<,>))]
+#endif
     abstract class IMutableIncidenceGraphContract<TVertex, TEdge>
         : IMutableIncidenceGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -18,21 +22,24 @@ namespace QuickGraph.Contracts
             EdgePredicate<TVertex, TEdge> predicate)
         {
             IMutableIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.OutEdges(v), ve => predicate(ve))));
             Contract.Ensures(Enumerable.All(ithis.OutEdges(v), ve => !predicate(ve)));
-
+#endif
             return default(int);
         }
 
         void IMutableIncidenceGraph<TVertex, TEdge>.ClearOutEdges(TVertex v)
         {
             IMutableIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(ithis.OutDegree(v) == 0);
+#endif
         }
 
         void IMutableIncidenceGraph<TVertex, TEdge>.TrimEdgeExcess()

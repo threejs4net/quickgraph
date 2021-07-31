@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -11,7 +13,9 @@ namespace QuickGraph
         private readonly TVertex vertex;
         protected VertexEventArgs(TVertex vertex)
         {
+#if CTR
             Contract.Requires(vertex != null);
+#endif
             this.vertex = vertex;
         }
 

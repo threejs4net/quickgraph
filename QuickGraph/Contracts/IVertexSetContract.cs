@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IVertexSet<>))]
+#endif
     abstract class IVertexSetContract<TVertex>
         : IVertexSet<TVertex>
     {
@@ -15,7 +19,9 @@ namespace QuickGraph.Contracts
             get 
             {
                 IVertexSet<TVertex> ithis = this;
+#if CTR
                 Contract.Ensures(Contract.Result<bool>() == (ithis.VertexCount == 0));
+#endif
 
                 return default(bool);
             }
@@ -26,7 +32,9 @@ namespace QuickGraph.Contracts
             get
             {
                 IVertexSet<TVertex> ithis = this;
+#if CTR
                 Contract.Ensures(Contract.Result<int>() == Enumerable.Count(ithis.Vertices));
+#endif
 
                 return default(int);
             }
@@ -36,7 +44,9 @@ namespace QuickGraph.Contracts
         {
             get 
             {
+#if CTR
                 Contract.Ensures(Contract.Result<IEnumerable<TVertex>>() != null);
+#endif
 
                 return default(IEnumerable<TVertex>);
             }

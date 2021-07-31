@@ -1,15 +1,22 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
+
 namespace QuickGraph.Collections
 {
+#if CTR
     [ContractClassFor(typeof(IVertexEdgeDictionary<,>))]
+#endif
     abstract class IVertexEdgeDictionaryContract<TVertex, TEdge> 
         : IVertexEdgeDictionary<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
     {
         IVertexEdgeDictionary<TVertex, TEdge> IVertexEdgeDictionary<TVertex, TEdge>.Clone()
         {
+#if CTR
             Contract.Ensures(Contract.Result<IVertexEdgeDictionary<TVertex, TEdge>>() != null);
+#endif
             throw new NotImplementedException();
         }
 

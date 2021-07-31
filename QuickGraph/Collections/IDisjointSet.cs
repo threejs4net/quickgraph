@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Collections
 {
@@ -8,7 +10,9 @@ namespace QuickGraph.Collections
     /// A disjoint-set data structure
     /// </summary>
     /// <typeparam name="T"></typeparam>
+#if CTR
     [ContractClass(typeof(QuickGraph.Collections.Contracts.IDisjointSetContract<>))]
+#endif
     public interface IDisjointSet<T>
     {
         /// <summary>
@@ -55,7 +59,10 @@ namespace QuickGraph.Collections
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
+#if CTR        
         [Pure]
+#endif
+
         bool Contains(T value);
     }
 }

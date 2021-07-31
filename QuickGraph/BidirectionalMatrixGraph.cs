@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 
 namespace QuickGraph
@@ -24,7 +26,9 @@ namespace QuickGraph
 
         public BidirectionalMatrixGraph(int vertexCount)        
         {
+#if CTR        
             Contract.Requires(vertexCount > 0);
+#endif
 
             this.vertexCount = vertexCount;
             this.edgeCount = 0;
@@ -84,7 +88,10 @@ namespace QuickGraph
         #endregion
 
         #region IBidirectionalGraph<int,Edge> Members
+#if CTR        
         [Pure]
+#endif
+
         public bool IsInEdgesEmpty(int v)
         {
             for (int i = 0; i < this.VertexCount; ++i)
@@ -93,7 +100,10 @@ namespace QuickGraph
             return true;
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public int InDegree(int v)
         {
             int count = 0;
@@ -103,7 +113,10 @@ namespace QuickGraph
             return count;
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public IEnumerable<TEdge> InEdges(int v)
         {
             for (int i = 0; i < this.VertexCount; ++i)
@@ -114,13 +127,17 @@ namespace QuickGraph
             }
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool TryGetInEdges(int v, out IEnumerable<TEdge> edges)
         {
+#if CTR        
             Contract.Ensures(Contract.Result<bool>() == (0 <= 0 && v > this.VertexCount));
             Contract.Ensures(
                 Contract.Result<bool>() == 
                 (Contract.ValueAtReturn<IEnumerable<TEdge>>(out edges) != null));
+#endif
 
             if (v > -1 && v < this.vertexCount)
             {
@@ -131,7 +148,9 @@ namespace QuickGraph
             return false;
         }
 
+#if CTR        
         [Pure]
+#endif
         public TEdge InEdge(int v, int index)
         {
             int count = 0;
@@ -148,7 +167,9 @@ namespace QuickGraph
             throw new ArgumentOutOfRangeException("index");
         }
 
+#if CTR        
         [Pure]
+#endif
         public int Degree(int v)
         {
             return this.InDegree(v) + this.OutDegree(v);
@@ -188,7 +209,9 @@ namespace QuickGraph
 
         #region IImplicitGraph<int,Edge> Members
 
+#if CTR        
         [Pure]
+#endif
         public bool IsOutEdgesEmpty(int v)
         {
             for (int j = 0; j < this.vertexCount; ++j)
@@ -197,7 +220,9 @@ namespace QuickGraph
             return true;
         }
 
+#if CTR        
         [Pure]
+#endif
         public int OutDegree(int v)
         {
             int count = 0;
@@ -207,7 +232,9 @@ namespace QuickGraph
             return count;
         }
 
+#if CTR        
         [Pure]
+#endif
         public IEnumerable<TEdge> OutEdges(int v)
         {
             for (int j = 0; j < this.vertexCount; ++j)
@@ -218,7 +245,9 @@ namespace QuickGraph
             }
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool TryGetOutEdges(int v, out IEnumerable<TEdge> edges)
         {
             if (v > -1 && v < this.vertexCount)
@@ -230,7 +259,9 @@ namespace QuickGraph
             return false;
         }
 
+#if CTR        
         [Pure]
+#endif
         public TEdge OutEdge(int v, int index)
         {
             int count = 0;
@@ -260,7 +291,9 @@ namespace QuickGraph
             }
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool ContainsVertex(int vertex)
         {
             return vertex >= 0 && vertex < this.VertexCount;
@@ -269,7 +302,9 @@ namespace QuickGraph
         #endregion
 
         #region IEdgeListGraph<int,Edge> Members
+#if CTR        
         [Pure]
+#endif
         public bool ContainsEdge(TEdge edge)
         {
             TEdge e = this.edges[edge.Source, edge.Target];
@@ -283,8 +318,9 @@ namespace QuickGraph
 
         public int RemoveInEdgeIf(int v, EdgePredicate<int, TEdge> edgePredicate)
         {
+#if CTR        
             Contract.Requires(0 <= v && v < this.VertexCount);
-
+#endif
             int count = 0;
             for (int i = 0; i < this.VertexCount; ++i)
             {
@@ -300,8 +336,9 @@ namespace QuickGraph
 
         public void ClearInEdges(int v)
         {
+#if CTR        
             Contract.Requires(0 <= v && v < this.VertexCount);
-
+#endif
             for (int i = 0; i < this.VertexCount; ++i)
             {
                 TEdge e = this.edges[i, v];
@@ -312,8 +349,9 @@ namespace QuickGraph
 
         public void ClearEdges(int v)
         {
+#if CTR        
             Contract.Requires(0 <= v && v < this.VertexCount);
-
+#endif
             this.ClearInEdges(v);
             this.ClearOutEdges(v);
         }
@@ -324,8 +362,9 @@ namespace QuickGraph
 
         public int RemoveOutEdgeIf(int v, EdgePredicate<int, TEdge> predicate)
         {
+#if CTR        
             Contract.Requires(0 <= v && v < this.VertexCount);
-
+#endif
             int count = 0;
             for (int j = 0; j < this.VertexCount; ++j)
             {
@@ -341,8 +380,9 @@ namespace QuickGraph
 
         public void ClearOutEdges(int v)
         {
+#if CTR        
             Contract.Requires(0 <= v && v < this.VertexCount);
-
+#endif
             for (int j = 0; j < this.VertexCount; ++j)
             {
                 TEdge e = this.edges[v, j];
@@ -434,12 +474,13 @@ namespace QuickGraph
             int edgeCount,
             TEdge[,] edges)
         {
+#if CTR        
             Contract.Requires(vertexCount > 0);
             Contract.Requires(edgeCount >= 0);
             Contract.Requires(edges != null);
             Contract.Requires(vertexCount == edges.GetLength(0));
             Contract.Requires(vertexCount == edges.GetLength(1));
-
+#endif
             this.vertexCount = vertexCount;
             this.edgeCount = edgeCount;
             this.edges = edges;

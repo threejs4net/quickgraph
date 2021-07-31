@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Graphviz;
 
 namespace QuickGraph.Data
@@ -15,8 +17,9 @@ namespace QuickGraph.Data
 #endif
             DataSet ds)
         {
+#if CTR
             Contract.Requires(ds != null);
-
+#endif
             var g = new DataSetGraph(ds);
             var populator = new DataSetGraphPopulatorAlgorithm(g, ds);
             populator.Compute();
@@ -30,8 +33,9 @@ this
 #endif
             DataSetGraph visitedGraph)
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
-
+#endif
             var algorithm = new DataSetGraphvizAlgorithm(visitedGraph);
             return algorithm.Generate();
         }

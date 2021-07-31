@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Predicates
 {
@@ -12,8 +14,9 @@ namespace QuickGraph.Predicates
         public ResidualEdgePredicate(
             IDictionary<TEdge,double> residualCapacities)
 		{
+#if CTR
             Contract.Requires(residualCapacities != null);
-
+#endif
             this.residualCapacities = residualCapacities;
 		}
 
@@ -27,7 +30,9 @@ namespace QuickGraph.Predicates
 
 		public bool Test(TEdge e)
 		{
+#if CTR
             Contract.Requires(e != null);
+#endif
 			return 0 < this.residualCapacities[e];
 		}
     }

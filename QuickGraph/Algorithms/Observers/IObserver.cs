@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -10,7 +12,9 @@ namespace QuickGraph.Algorithms.Observers
     /// <reference-ref
     ///     id="gof02designpatterns"
     ///     />
+#if CTR
     [ContractClass(typeof(Contracts.IObserverContract<>))]
+#endif
     public interface IObserver<TAlgorithm>
     {
         /// <summary>

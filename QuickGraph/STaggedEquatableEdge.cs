@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
@@ -26,9 +28,10 @@ namespace QuickGraph
 
         public STaggedEquatableEdge(TVertex source, TVertex target, TTag tag)
         {
+#if CTR        
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-
+#endif
             this.source = source;
             this.target = target;
             this.tag = tag;
@@ -90,11 +93,13 @@ namespace QuickGraph
         /// </returns>
         public bool Equals(STaggedEquatableEdge<TVertex,TTag> other)
         {
+#if CTR        
             Contract.Ensures(
                 Contract.Result<bool>() ==
                 (this.Source.Equals(other.Source) &&
                 this.Target.Equals(other.Target))
                 );
+#endif
 
             return
                 this.source.Equals(other.source) &&

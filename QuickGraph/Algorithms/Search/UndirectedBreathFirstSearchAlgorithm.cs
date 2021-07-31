@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Search
 {
@@ -49,9 +51,10 @@ namespace QuickGraph.Algorithms.Search
             )
             : base(host, visitedGraph)
         {
+#if CTR
             Contract.Requires(vertexQueue != null);
             Contract.Requires(vertexColors != null);
-
+#endif
             this.vertexColors = vertexColors;
             this.vertexQueue = vertexQueue;
         }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -31,7 +33,9 @@ namespace QuickGraph
             IVertexAndEdgeListGraph<TVertex, TEdge> visitedGraph
             )
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
+#endif
             this.vertexOutEdges = new Dictionary<TVertex, TEdge[]>(visitedGraph.VertexCount);
             this.edgeCount = visitedGraph.EdgeCount;
             foreach (var vertex in visitedGraph.Vertices)
@@ -46,9 +50,11 @@ namespace QuickGraph
             int edgeCount
             )
         {
+#if CTR
             Contract.Requires(vertexOutEdges != null);
             Contract.Requires(edgeCount >= 0);
             Contract.Requires(edgeCount == Enumerable.Sum(vertexOutEdges, kv => (kv.Value == null) ? 0 : kv.Value.Length));
+#endif
 
             this.vertexOutEdges = vertexOutEdges;
             this.edgeCount = edgeCount;

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 
 using QuickGraph.Algorithms.Search;
+#if CTR
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph.Algorithms.TopologicalSort
 {
 #if !SILVERLIGHT
@@ -25,8 +26,9 @@ namespace QuickGraph.Algorithms.TopologicalSort
             IList<TVertex> vertices)
             :base(g)
         {
+#if CTR
             Contract.Requires(vertices != null);
-
+#endif
             this.vertices = vertices;
         }
 

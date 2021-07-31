@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 
 namespace QuickGraph
@@ -9,7 +11,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertex</typeparam>
     /// <typeparam name="TEdge">type of the edge</typeparam>
+#if CTR        
     [ContractClass(typeof(ICloneableEdgeContract<,>))]
+#endif
     public interface ICloneableEdge<TVertex, TEdge> 
         : IEdge<TVertex>
         where TEdge : IEdge<TVertex>

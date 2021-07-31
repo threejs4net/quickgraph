@@ -4,8 +4,9 @@ namespace QuickGraph.Graphviz.Dot
     using System.IO;
     using System.Reflection;
     using System.Collections.ObjectModel;
+#if CTR
     using System.Diagnostics.Contracts;
-
+#endif
     public class GraphvizLayerCollection : Collection<GraphvizLayer>
     {
         private string m_Separators = ":";
@@ -57,8 +58,9 @@ namespace QuickGraph.Graphviz.Dot
             }
             set
             {
+#if CTR
                 Contract.Requires(!String.IsNullOrEmpty(value));
-
+#endif
                 this.m_Separators = value;
             }
         }

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Algorithms
@@ -77,7 +79,9 @@ namespace QuickGraph.Algorithms
         public event EdgeAction<TVertex,TEdge> TreeEdge;
         private void OnTreeEdge(TEdge e)
         {
+#if CTR
             Contract.Requires(e != null);
+#endif
             var eh = this.TreeEdge;
             if (eh != null)
                 eh(e);
@@ -86,8 +90,9 @@ namespace QuickGraph.Algorithms
         public event EdgeAction<TVertex,TEdge> CircuitEdge;
         private void OnCircuitEdge(TEdge e)
         {
+#if CTR
             Contract.Requires(e != null);
-
+#endif
             var eh = this.CircuitEdge;
             if (eh != null)
                 eh(e);
@@ -96,8 +101,9 @@ namespace QuickGraph.Algorithms
         public event EdgeAction<TVertex,TEdge> VisitEdge;
         private void OnVisitEdge(TEdge e)
         {
+#if CTR
             Contract.Requires(e != null);
-
+#endif
             var eh = this.VisitEdge;
             if (eh != null)
                 eh(e);
@@ -105,8 +111,9 @@ namespace QuickGraph.Algorithms
 
         private bool Search(TVertex u)
         {
+#if CTR
             Contract.Requires(u != null);
-
+#endif
             foreach (var e in SelectOutEdgesNotInCircuit(u))
             {
                 OnTreeEdge(e);
@@ -160,8 +167,9 @@ namespace QuickGraph.Algorithms
         /// <returns>number of eulerian trails</returns>
         public static int ComputeEulerianPathCount(IVertexAndEdgeListGraph<TVertex,TEdge> g)
         {
+#if CTR
             Contract.Requires(g != null);
-
+#endif
             if (g.EdgeCount < g.VertexCount)
                 return 0;
 
@@ -403,7 +411,9 @@ namespace QuickGraph.Algorithms
         /// <exception cref="Exception">Eulerian trail not computed yet.</exception>
         public ICollection<ICollection<TEdge>> Trails(TVertex s)
         {
+#if CTR
             Contract.Requires(s != null);
+#endif
             if (this.Circuit.Count == 0)
                 throw new InvalidOperationException("Circuit is empty");
 

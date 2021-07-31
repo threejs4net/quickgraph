@@ -1,7 +1,9 @@
 ﻿#if NET20
 using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph;
 
 namespace System.Linq

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Search
 {
@@ -223,9 +225,10 @@ namespace QuickGraph.Algorithms.Search
         /// <exception cref="ArgumentNullException">se cannot be null</exception>
         private void Visit(TEdge se, int depth)
         {            
+#if CTR
             Contract.Requires(se != null);
             Contract.Requires(depth >= 0);
-
+#endif
             if (depth > this.maxDepth)
                 return;
 

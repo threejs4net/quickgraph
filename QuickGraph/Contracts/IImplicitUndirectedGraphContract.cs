@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IImplicitUndirectedGraph<,>))]
+#endif
     abstract class IImplicitUndirectedGraphContract<TVertex, TEdge> 
         : IImplicitUndirectedGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -17,7 +21,9 @@ namespace QuickGraph.Contracts
         {
             get
             {
+#if CTR
                 Contract.Ensures(Contract.Result<EdgeEqualityComparer<TVertex, TEdge>>() != null);
+#endif
                 return null;
             }
         }
@@ -26,6 +32,7 @@ namespace QuickGraph.Contracts
         IEnumerable<TEdge> IImplicitUndirectedGraph<TVertex, TEdge>.AdjacentEdges(TVertex v)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<IEnumerable<TEdge>>() != null);
@@ -38,7 +45,7 @@ namespace QuickGraph.Contracts
                         (edge.Source.Equals(v) || edge.Target.Equals(v))
                     )
                 );
-
+#endif
             return default(IEnumerable<TEdge>);
         }
 
@@ -46,10 +53,11 @@ namespace QuickGraph.Contracts
         int IImplicitUndirectedGraph<TVertex, TEdge>.AdjacentDegree(TVertex v)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<int>() == Enumerable.Count(ithis.AdjacentEdges(v)));
-
+#endif
             return default(int);
         }
 
@@ -57,10 +65,11 @@ namespace QuickGraph.Contracts
         bool IImplicitUndirectedGraph<TVertex, TEdge>.IsAdjacentEdgesEmpty(TVertex v)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<bool>() == (ithis.AdjacentDegree(v) == 0));
-
+#endif
             return default(bool);
         }
 
@@ -68,12 +77,14 @@ namespace QuickGraph.Contracts
         TEdge IImplicitUndirectedGraph<TVertex, TEdge>.AdjacentEdge(TVertex v, int index)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<TEdge>() != null);
             Contract.Ensures(
                 Contract.Result<TEdge>().Source.Equals(v)
                 || Contract.Result<TEdge>().Target.Equals(v));
+#endif
 
             return default(TEdge);
         }
@@ -82,9 +93,10 @@ namespace QuickGraph.Contracts
         bool IImplicitUndirectedGraph<TVertex, TEdge>.TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
-
+#endif
             edge = default(TEdge);
             return default(bool);
         }
@@ -93,10 +105,11 @@ namespace QuickGraph.Contracts
         bool IImplicitUndirectedGraph<TVertex, TEdge>.ContainsEdge(TVertex source, TVertex target)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Ensures(Contract.Result<bool>() == Enumerable.Any(ithis.AdjacentEdges(source), e => e.Target.Equals(target) || e.Source.Equals(target)));
-
+#endif
             return default(bool);
         }
         #endregion

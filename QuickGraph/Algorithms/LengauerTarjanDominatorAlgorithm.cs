@@ -5,7 +5,9 @@ using System.Text;
 using QuickGraph.Algorithms.Services;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms
 {
@@ -104,8 +106,9 @@ namespace QuickGraph.Algorithms
             public readonly List<TVertex> Vertices;
             public TimeStampObserver(List<TVertex> vertices)
             {
+#if CTR
                 Contract.Requires(vertices != null);
-
+#endif
                 this.Vertices = vertices;
             }
 

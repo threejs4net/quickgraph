@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 using QuickGraph.Algorithms;
 using System.Diagnostics;
@@ -32,11 +34,12 @@ namespace QuickGraph.Collections
             Func<TDistance, TDistance, int> distanceComparison
             )
         {
+#if CTR
             Contract.Requires(valueCount >= 0);
             Contract.Requires(valueCount == 0 || (values != null && valueCount == Enumerable.Count(values)));
             Contract.Requires(distances != null);
             Contract.Requires(distanceComparison != null);
-
+#endif
             this.distances = distances;
             this.cells = new Dictionary<TVertex, FibonacciHeapCell<TDistance, TVertex>>(valueCount);
             if (valueCount > 0)
@@ -58,9 +61,10 @@ namespace QuickGraph.Collections
             Func<TDistance, TDistance, int> distanceComparison
             )
         {
+#if CTR
             Contract.Requires(values != null);
             Contract.Requires(distanceComparison != null);
-
+#endif
             this.distances = AlgorithmExtensions.GetIndexer(values);
             this.cells = new Dictionary<TVertex, FibonacciHeapCell<TDistance, TVertex>>(values.Count);
             foreach (var kv in values)
@@ -88,11 +92,17 @@ namespace QuickGraph.Collections
 
         public int Count
         {
-            [Pure]
+#if CTR        
+        [Pure]
+#endif
+
             get { return this.heap.Count; }
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public bool Contains(TVertex value)
         {
             FibonacciHeapCell<TDistance, TVertex> result;
@@ -114,19 +124,25 @@ namespace QuickGraph.Collections
         public TVertex Dequeue()
         {
             var result = heap.Top;
+#if CTR
             Contract.Assert(result != null);
+#endif
             heap.Dequeue();            
             return result.Value;
         }
 
         public TVertex Peek()
         {
+#if CTR
             Contract.Assert(this.heap.Top != null);
-
+#endif
             return this.heap.Top.Value;
         }
 
+#if CTR        
         [Pure]
+#endif
+
         public TVertex[] ToArray()
         {
             TVertex[] result = new TVertex[this.heap.Count];

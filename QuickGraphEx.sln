@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickGraph.Graphviz", "Quic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickGraph.Data", "QuickGraph.Data\QuickGraph.Data.csproj", "{734CB49E-AEB7-4BE3-96E3-93FB82137984}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGraph.Serialization", "QuickGraph.Serialization\QuickGraph.Serialization.csproj", "{563D528B-42BF-4CA8-87DB-FC82F58DCC9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickGraph.Serialization", "QuickGraph.Serialization\QuickGraph.Serialization.csproj", "{563D528B-42BF-4CA8-87DB-FC82F58DCC9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

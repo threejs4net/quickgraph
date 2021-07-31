@@ -3,7 +3,9 @@ using System.Collections.Generic;
 #if !SILVERLIGHT
 using System.Runtime.Serialization;
 #endif
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Collections
 {
@@ -12,7 +14,9 @@ namespace QuickGraph.Collections
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
     /// <typeparam name="TEdge"></typeparam>
+#if CTR
     [ContractClass(typeof(IVertexEdgeDictionaryContract<,>))]
+#endif
     public interface IVertexEdgeDictionary<TVertex, TEdge>
         : IDictionary<TVertex, IEdgeList<TVertex, TEdge>>
 #if !SILVERLIGHT

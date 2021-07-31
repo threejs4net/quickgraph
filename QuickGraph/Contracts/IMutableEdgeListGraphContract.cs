@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IMutableEdgeListGraph<,>))]
+#endif
     abstract class IMutableEdgeListGraphContract<TVertex, TEdge>
         : IMutableEdgeListGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -14,13 +18,14 @@ namespace QuickGraph.Contracts
         bool IMutableEdgeListGraph<TVertex, TEdge>.AddEdge(TEdge e)
         {
             IMutableEdgeListGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(e != null);
             Contract.Requires(ithis.ContainsVertex(e.Source));
             Contract.Requires(ithis.ContainsVertex(e.Target));
             Contract.Ensures(ithis.ContainsEdge(e));
             Contract.Ensures(ithis.AllowParallelEdges || Contract.Result<bool>() == Contract.OldValue(!ithis.ContainsEdge(e)));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) + (Contract.Result<bool>() ? 1 : 0));
-
+#endif
             return default(bool);
         }
 
@@ -33,6 +38,7 @@ namespace QuickGraph.Contracts
         int IMutableEdgeListGraph<TVertex, TEdge>.AddEdgeRange(IEnumerable<TEdge> edges)
         {
             IMutableEdgeListGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(edges != null);
             Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(edges, edge => edge != null));
             Contract.Requires(Enumerable.All(edges, edge =>
@@ -43,18 +49,19 @@ namespace QuickGraph.Contracts
             Contract.Ensures(
                 Contract.Result<int>() == Contract.OldValue(Enumerable.Count(edges, edge => !ithis.ContainsEdge(edge))));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) + Contract.Result<int>());
-
+#endif
             return default(int);
         }
 
         bool IMutableEdgeListGraph<TVertex, TEdge>.RemoveEdge(TEdge e)
         {
             IMutableEdgeListGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(e != null);
             Contract.Ensures(Contract.Result<bool>() == Contract.OldValue(ithis.ContainsEdge(e)));
             Contract.Ensures(!ithis.ContainsEdge(e));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) - (Contract.Result<bool>() ? 1 : 0));
-
+#endif
             return default(bool);
         }
 
@@ -67,11 +74,12 @@ namespace QuickGraph.Contracts
         int IMutableEdgeListGraph<TVertex, TEdge>.RemoveEdgeIf(EdgePredicate<TVertex, TEdge> predicate)
         {
             IMutableEdgeListGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.Edges, e => predicate(e))));
             Contract.Ensures(Enumerable.All(ithis.Edges, e => !predicate(e)));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) - Contract.Result<int>());
-
+#endif
             return default(int);
         }
 

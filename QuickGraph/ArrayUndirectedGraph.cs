@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -30,7 +32,9 @@ namespace QuickGraph
         public ArrayUndirectedGraph(
             IUndirectedGraph<TVertex, TEdge> graph)
         {
-            Contract.Requires(graph != null);
+#if CTR
+Contract.Requires(graph != null);
+#endif
 
             this.edgeEqualityComparer = graph.EdgeEqualityComparer;
             this.edgeCount = graph.EdgeCount;

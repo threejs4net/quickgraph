@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Contracts;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {

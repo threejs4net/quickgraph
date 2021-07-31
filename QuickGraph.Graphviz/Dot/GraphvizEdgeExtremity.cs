@@ -2,7 +2,9 @@ namespace QuickGraph.Graphviz.Dot
 {
     using System;
     using System.Collections;
+#if CTR
     using System.Diagnostics.Contracts;
+#endif
     using System.Collections.Generic;
 
     public class GraphvizEdgeExtremity
@@ -28,8 +30,9 @@ namespace QuickGraph.Graphviz.Dot
 
         public void AddParameters(IDictionary<string, object> dic)
         {
+#if CTR
             Contract.Requires(dic != null);
-            
+#endif            
             string text = null;
             if (this.IsHead)
             {

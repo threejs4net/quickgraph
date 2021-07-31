@@ -4,7 +4,9 @@ using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 
 namespace QuickGraph.Algorithms.ShortestPath
@@ -130,10 +132,11 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         private void ComputeFromRoot(TVertex rootVertex)
         {
+#if CTR
             Contract.Requires(rootVertex != null);
             Contract.Requires(this.VisitedGraph.ContainsVertex(rootVertex));
             Contract.Requires(this.VertexColors[rootVertex] == GraphColor.White);
-
+#endif
             this.VertexColors[rootVertex] = GraphColor.Gray;
             this.Distances[rootVertex] = 0;
             this.ComputeNoInit(rootVertex);
@@ -146,8 +149,14 @@ namespace QuickGraph.Algorithms.ShortestPath
             var top = this.vertexQueue.Peek();
             var vertices = this.vertexQueue.ToArray();
             for (int i = 1; i < vertices.Length; ++i)
+            {
                 if (this.Distances[top] > this.Distances[vertices[i]])
+                {
+#if CTR
                     Contract.Assert(false);
+#endif
+                }
+            }
         }
 
         public void ComputeNoInit(TVertex s)

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR        
 using QuickGraph.Contracts;
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -11,7 +13,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">The type of the vertex.</typeparam>
     /// <typeparam name="TEdge">The type of the edge.</typeparam>
+#if CTR        
     [ContractClass(typeof(IEdgeSetContract<,>))]
+#endif
     public interface IEdgeSet<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
     {
@@ -39,7 +43,9 @@ namespace QuickGraph
         /// <returns>
         /// 	<c>true</c> if the specified edge contains edge; otherwise, <c>false</c>.
         /// </returns>
+#if CTR        
         [Pure]
+#endif
         bool ContainsEdge(TEdge edge);
     }
 

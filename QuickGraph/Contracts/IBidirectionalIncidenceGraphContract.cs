@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IBidirectionalIncidenceGraph<,>))]
+#endif
     abstract class IBidirectionalIncidenceGraphContract<TVertex, TEdge>
         : IBidirectionalIncidenceGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -16,10 +20,11 @@ namespace QuickGraph.Contracts
         bool IBidirectionalIncidenceGraph<TVertex, TEdge>.IsInEdgesEmpty(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<bool>() == (ithis.InDegree(v) == 0));
-
+#endif
             return default(bool);
         }
 
@@ -27,10 +32,11 @@ namespace QuickGraph.Contracts
         int IBidirectionalIncidenceGraph<TVertex, TEdge>.InDegree(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<int>() == Enumerable.Count(ithis.InEdges(v)));
-
+#endif
             return default(int);
         }
 
@@ -38,6 +44,7 @@ namespace QuickGraph.Contracts
         IEnumerable<TEdge> IBidirectionalIncidenceGraph<TVertex, TEdge>.InEdges(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<IEnumerable<TEdge>>() != null);
@@ -46,6 +53,7 @@ namespace QuickGraph.Contracts
                 edge => edge != null && edge.Target.Equals(v)
                 )
             );
+#endif
 
             return default(IEnumerable<TEdge>);
         }
@@ -54,6 +62,7 @@ namespace QuickGraph.Contracts
         bool IBidirectionalIncidenceGraph<TVertex, TEdge>.TryGetInEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<bool>() == ithis.ContainsVertex(v));
@@ -64,7 +73,7 @@ namespace QuickGraph.Contracts
                 edge => edge != null && edge.Target.Equals(v)
                 )
             );
-
+#endif
             edges = null;
             return default(bool);
         }
@@ -73,11 +82,12 @@ namespace QuickGraph.Contracts
         TEdge IBidirectionalIncidenceGraph<TVertex, TEdge>.InEdge(TVertex v, int index)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Requires(index >= 0 && index < ithis.InDegree(v));
             Contract.Ensures(Contract.Result<TEdge>().Equals(Enumerable.ElementAt(ithis.InEdges(v), index)));
-
+#endif
             return default(TEdge);
         }
 
@@ -85,10 +95,11 @@ namespace QuickGraph.Contracts
         int IBidirectionalIncidenceGraph<TVertex, TEdge>.Degree(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(Contract.Result<int>() == ithis.InDegree(v) + ithis.OutDegree(v));
-
+#endif
             return default(int);
         }
 

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IBidirectionalGraph<,>))]
+#endif
     abstract class IBidirectionalGraphContract<TVertex, TEdge>
         : IBidirectionalGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
@@ -32,16 +34,18 @@ namespace QuickGraph
         /// <param name="tag">The tag.</param>
         public SUndirectedTaggedEdge(TVertex source, TVertex target, TTag tag)
         {
+#if CTR        
             Contract.Requires(source != null);
             Contract.Requires(target != null);
             Contract.Requires(Comparer<TVertex>.Default.Compare(source, target) <= 0);
             Contract.Ensures(Contract.ValueAtReturn(out this).Source.Equals(source));
             Contract.Ensures(Contract.ValueAtReturn(out this).Target.Equals(target));
+#endif
 
             this.source = source;
             this.target = target;
             this.tag = tag;
-            this.TagChanged = null;
+            TagChanged = null;
         }
 
         /// <summary>

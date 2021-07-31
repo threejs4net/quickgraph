@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.RandomWalks
 {
@@ -14,8 +16,9 @@ namespace QuickGraph.Algorithms.RandomWalks
         private IDictionary<TEdge, double> weights;
         public WeightedMarkovEdgeChainBase(IDictionary<TEdge, double> weights)
         {
+#if CTR
             Contract.Requires(weights != null);
-
+#endif
             this.weights = weights;
         }
 
@@ -43,17 +46,19 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         protected bool TryGetSuccessor(IImplicitGraph<TVertex, TEdge> g, TVertex u, double position, out TEdge successor)
         {
+#if CTR
             Contract.Requires(g != null);
             Contract.Requires(u != null);
-
+#endif
             var edges = g.OutEdges(u);
             return TryGetSuccessor(edges, position, out successor);
         }
 
         protected bool TryGetSuccessor(IEnumerable<TEdge> edges, double position, out TEdge successor)
         {
+#if CTR
             Contract.Requires(edges != null);
-
+#endif
             double pos = 0;
             double nextPos = 0;
             foreach (var e in edges)

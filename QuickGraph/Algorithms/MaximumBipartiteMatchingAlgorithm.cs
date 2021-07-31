@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.MaximumFlow;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 
 namespace QuickGraph.Algorithms
@@ -19,8 +21,10 @@ namespace QuickGraph.Algorithms
             )
             : base(visitedGraph)
         {
+#if CTR
             Contract.Requires(vertexFactory != null);
             Contract.Requires(edgeFactory != null);
+#endif
 
             this.VertexSetA = vertexSetA;
             this.VertexSetB = vertexSetB;

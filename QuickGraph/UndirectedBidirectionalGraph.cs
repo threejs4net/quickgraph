@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -20,8 +22,9 @@ namespace QuickGraph
 
         public UndirectedBidirectionalGraph(IBidirectionalGraph<TVertex, TEdge> visitedGraph)
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
-
+#endif
             this.visitedGraph = visitedGraph;
         }
 
@@ -40,7 +43,9 @@ namespace QuickGraph
 
         #region IUndirectedGraph<Vertex,Edge> Members
 
+#if CTR
         [Pure]
+#endif
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
         {
             foreach (var e in this.VisitedGraph.OutEdges(v))
@@ -55,25 +60,33 @@ namespace QuickGraph
             }
         }
 
+#if CTR        
         [Pure]
+#endif
         public int AdjacentDegree(TVertex v)
         {
             return this.VisitedGraph.Degree(v);
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
             return this.VisitedGraph.IsOutEdgesEmpty(v) && this.VisitedGraph.IsInEdgesEmpty(v);
         }
 
+#if CTR        
         [Pure]
+#endif
         public TEdge AdjacentEdge(TVertex v, int index)
         {
             throw new NotSupportedException();
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             throw new NotSupportedException();
@@ -102,7 +115,9 @@ namespace QuickGraph
             get { return this.VisitedGraph.Vertices; }
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool ContainsVertex(TVertex vertex)
         {
             return this.VisitedGraph.ContainsVertex(vertex);
@@ -127,7 +142,9 @@ namespace QuickGraph
             get { return this.VisitedGraph.Edges; }
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool ContainsEdge(TEdge edge)
         {
             return this.VisitedGraph.ContainsEdge(edge);

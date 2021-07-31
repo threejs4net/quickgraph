@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 
 namespace QuickGraph
@@ -10,7 +12,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
     /// <typeparam name="TEdge"></typeparam>
+#if CTR        
     [ContractClass(typeof(IMutableUndirectedGraphContract<,>))]
+#endif
     public interface IMutableUndirectedGraph<TVertex,TEdge> 
         : IMutableEdgeListGraph<TVertex,TEdge>
         , IMutableVertexSet<TVertex>

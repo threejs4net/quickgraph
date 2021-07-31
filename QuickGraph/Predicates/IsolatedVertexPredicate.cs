@@ -1,5 +1,7 @@
 using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Predicates
 {
@@ -15,16 +17,21 @@ namespace QuickGraph.Predicates
 
         public IsolatedVertexPredicate(IBidirectionalGraph<TVertex,TEdge> visitedGraph)
         {
+#if CTR
             Contract.Requires(visitedGraph!=null);
+#endif
 
             this.visitedGraph = visitedGraph;
         }
 
+#if CTR        
         [Pure]
+#endif
         public bool Test(TVertex v)
         {
+#if CTR
             Contract.Requires(v != null);
-
+#endif
             return this.visitedGraph.IsInEdgesEmpty(v)
                 && this.visitedGraph.IsOutEdgesEmpty(v);
         }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using QuickGraph.Algorithms.Services;
 using QuickGraph.Collections;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.ConnectedComponents
 {
@@ -43,7 +45,9 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
+#if CTR
                 Contract.Assert(this.ds != null);
+#endif
                 return this.ds.SetCount;
             }
         }
@@ -56,13 +60,14 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         /// <returns></returns>
         public KeyValuePair<int, IDictionary<TVertex, int>> GetComponents()
         {
+#if CTR
             Contract.Ensures(
                 Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Key == this.ComponentCount);
             Contract.Ensures(
                 Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Value.Count == this.VisitedGraph.VertexCount);
             // TODO: more contracts
             Contract.Assert(this.ds != null);
-            
+#endif            
             var representatives = new Dictionary<TVertex, int>(this.ds.SetCount);
             if (this.components == null)
                 this.components = new Dictionary<TVertex, int>(this.VisitedGraph.VertexCount);

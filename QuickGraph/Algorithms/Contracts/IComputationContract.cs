@@ -1,9 +1,13 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IComputation))]
+#endif
     abstract class IComputationContract
         : IComputation
     {
@@ -12,7 +16,9 @@ namespace QuickGraph.Algorithms.Contracts
         {
             get
             {
+#if CTR
                 Contract.Ensures(Contract.Result<object>() != null);
+#endif
                 return null;
             }
         }
@@ -21,8 +27,9 @@ namespace QuickGraph.Algorithms.Contracts
         {
             get 
             {
+#if CTR
                 Contract.Ensures(Enum.IsDefined(typeof(ComputationState), Contract.Result<ComputationState>()));
-
+#endif
                 return default(ComputationState);
             }
         }

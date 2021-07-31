@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Graphviz.Dot
 {
@@ -16,10 +18,12 @@ namespace QuickGraph.Graphviz.Dot
         public GraphvizColor(
             byte a, byte r, byte g, byte b)
         {
+#if CTR
             Contract.Requires(a >= 0);
             Contract.Requires(r >= 0);
             Contract.Requires(g >= 0);
             Contract.Requires(b >= 0);
+#endif
 
             this.a = a;
             this.r = r;

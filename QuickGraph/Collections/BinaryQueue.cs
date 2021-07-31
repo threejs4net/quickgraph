@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#if CTR
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph.Collections
 {
 #if !SILVERLIGHT
@@ -25,8 +26,10 @@ namespace QuickGraph.Collections
             Func<TDistance, TDistance, int> distanceComparison
             )
 		{
+#if CTR
             Contract.Requires(distances != null);
             Contract.Requires(distanceComparison != null);
+#endif
 
 			this.distances = distances;
             this.heap = new BinaryHeap<TDistance, TVertex>(distanceComparison);

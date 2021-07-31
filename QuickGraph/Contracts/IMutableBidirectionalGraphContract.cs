@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IMutableBidirectionalGraph<,>))]
+#endif
     abstract class IMutableBidirectionalGraphContract<TVertex, TEdge>
         : IMutableBidirectionalGraph<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -14,6 +18,7 @@ namespace QuickGraph.Contracts
         int IMutableBidirectionalGraph<TVertex, TEdge>.RemoveInEdgeIf(TVertex v, EdgePredicate<TVertex, TEdge> predicate)
         {
             IMutableBidirectionalGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(predicate != null);
             Contract.Requires(ithis.ContainsVertex(v));
@@ -21,25 +26,29 @@ namespace QuickGraph.Contracts
             Contract.Ensures(Enumerable.All(ithis.InEdges(v), e => predicate(e)));
             Contract.Ensures(Contract.Result<int>() == Contract.OldValue(Enumerable.Count(ithis.InEdges(v), e => predicate(e))));
             Contract.Ensures(ithis.InDegree(v) == Contract.OldValue(ithis.InDegree(v)) - Contract.Result<int>());
-
+#endif
             return default(int);
         }
 
         void IMutableBidirectionalGraph<TVertex, TEdge>.ClearInEdges(TVertex v)
         {
             IMutableBidirectionalGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) - Contract.OldValue(ithis.InDegree(v)));
             Contract.Ensures(ithis.InDegree(v) == 0);
+#endif
         }
 
         void IMutableBidirectionalGraph<TVertex, TEdge>.ClearEdges(TVertex v)
         {
             IMutableBidirectionalGraph<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(v != null);
             Contract.Requires(ithis.ContainsVertex(v));
             Contract.Ensures(!ithis.ContainsVertex(v));
+#endif
         }
 
 

@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -22,8 +24,9 @@ namespace QuickGraph
         public TaggedEquatableEdge(TVertex source, TVertex target, TTag tag)
             : base(source, target)
         {
+#if CTR        
             Contract.Ensures(Object.Equals(this.Tag, tag));
-
+#endif
             this.tag = tag;
         }
 

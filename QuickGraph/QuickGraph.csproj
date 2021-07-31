@@ -7,6 +7,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin\Debug\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
+    <None Remove="QuickGraph.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="OLDQuickGraph.csproj" />
   </ItemGroup>
 
 </Project>

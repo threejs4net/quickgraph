@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Predicates
 {
@@ -13,8 +15,9 @@ namespace QuickGraph.Predicates
 
         public SinkVertexPredicate(IIncidenceGraph<TVertex, TEdge> visitedGraph)
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
-
+#endif
             this.visitedGraph = visitedGraph;
         }
 

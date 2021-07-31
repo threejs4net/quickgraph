@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 
 using QuickGraph.Collections;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.TopologicalSort
 {
@@ -66,8 +68,9 @@ namespace QuickGraph.Algorithms.TopologicalSort
 
         public void Compute(IList<TVertex> vertices)
         {
+#if CTR
             Contract.Requires(vertices != null);
-
+#endif
             this.sortedVertices = vertices;
             Compute();
         }

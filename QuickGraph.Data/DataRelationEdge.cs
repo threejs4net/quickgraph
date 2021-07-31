@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Data
 {
@@ -12,7 +14,9 @@ namespace QuickGraph.Data
         private readonly DataRelation relation;
         public DataRelationEdge(DataRelation relation)
         {
+#if CTR
             Contract.Requires(relation != null);
+#endif
 
             this.relation = relation;
         }

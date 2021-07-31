@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Linq;
 
 namespace QuickGraph.Collections
@@ -43,9 +45,10 @@ namespace QuickGraph.Collections
 
         public BinaryHeap(int capacity, Func<TPriority, TPriority, int> priorityComparison)
         {
+#if CTR
             Contract.Requires(capacity >= 0);
             Contract.Requires(priorityComparison != null);
-
+#endif
             this.items = new KeyValuePair<TPriority, TValue>[capacity];
             this.priorityComparsion = priorityComparison;
         }
@@ -210,24 +213,29 @@ namespace QuickGraph.Collections
             this.Add(priority, value);
         }
 
+#if CTR        
         [Pure]
+#endif
+
         private bool Less(int i, int j)
         {
+#if CTR
             Contract.Requires(
                 i >= 0 & i < this.count &
                 j >= 0 & j < this.count &
                 i != j);
-
+#endif
             return this.priorityComparsion(this.items[i].Key, this.items[j].Key) <= 0;
         }
 
         private void Swap(int i, int j)
         {
+#if CTR
             Contract.Requires(
                 i >= 0 && i < this.count &&
                 j >= 0 && j < this.count &&
                 i != j);
-
+#endif
             var kv = this.items[i];
             this.items[i] = this.items[j];
             this.items[j] = kv;
@@ -285,7 +293,9 @@ namespace QuickGraph.Collections
                         throw new InvalidOperationException();
                     if (this.index < 0 | this.index == this.count)
                         throw new InvalidOperationException();
+#if CTR
                     Contract.Assert(this.index <= this.count);
+#endif
                     return this.items[this.index];
                 }
             }

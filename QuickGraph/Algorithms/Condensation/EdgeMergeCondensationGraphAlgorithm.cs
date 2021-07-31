@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Condensation
 {
@@ -21,9 +23,10 @@ namespace QuickGraph.Algorithms.Condensation
             )
             :base(visitedGraph)
         {
+#if CTR
             Contract.Requires(condensatedGraph != null);
             Contract.Requires(vertexPredicate != null);
-
+#endif
             this.condensatedGraph = condensatedGraph;
             this.vertexPredicate = vertexPredicate;
         }

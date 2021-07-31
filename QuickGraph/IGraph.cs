@@ -1,6 +1,8 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
 using QuickGraph.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -10,7 +12,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
     /// <typeparam name="TEdge">type of the edges</typeparam>
+#if CTR        
     [ContractClass(typeof(IGraphContract<,>))]
+#endif
     public interface IGraph<TVertex,TEdge>
         where TEdge : IEdge<TVertex>
     {

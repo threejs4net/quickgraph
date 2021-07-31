@@ -1,6 +1,7 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph
 {
     /// <summary>
@@ -22,8 +23,9 @@ namespace QuickGraph
         /// <param name="edge">The edge.</param>
         public EdgeEventArgs(TEdge edge)
         {
+#if CTR        
             Contract.Requires(edge != null);
-
+#endif
             this.edge = edge;
         }
 

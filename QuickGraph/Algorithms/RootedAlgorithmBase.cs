@@ -1,6 +1,8 @@
 ﻿using System;
 using QuickGraph.Algorithms.Services;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Collections.Generic;
 
 namespace QuickGraph.Algorithms
@@ -36,8 +38,9 @@ namespace QuickGraph.Algorithms
 
         public void SetRootVertex(TVertex rootVertex)
         {
+#if CTR
             Contract.Requires(rootVertex != null);
-
+#endif
             bool changed = Comparer<TVertex>.Default.Compare(this.rootVertex, rootVertex) != 0;
             this.rootVertex = rootVertex;
             if (changed)
@@ -54,8 +57,9 @@ namespace QuickGraph.Algorithms
         public event EventHandler RootVertexChanged;
         protected virtual void OnRootVertexChanged(EventArgs e)
         {
+#if CTR
             Contract.Requires(e != null);
-
+#endif
             var eh = this.RootVertexChanged;
             if (eh != null)
                 eh(this, e);
@@ -63,8 +67,9 @@ namespace QuickGraph.Algorithms
 
         public void Compute(TVertex rootVertex)
         {
+#if CTR
             Contract.Requires(rootVertex != null);
-
+#endif
             this.SetRootVertex(rootVertex);
             this.Compute();
         }

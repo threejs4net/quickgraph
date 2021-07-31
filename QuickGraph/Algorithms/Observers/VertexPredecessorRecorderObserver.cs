@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -28,8 +30,9 @@ namespace QuickGraph.Algorithms.Observers
         public VertexPredecessorRecorderObserver(
             Dictionary<TVertex, TEdge> vertexPredecessors)
         {
+#if CTR
             Contract.Requires(vertexPredecessors != null);
-
+#endif
             this.vertexPredecessors = vertexPredecessors;
         }
 

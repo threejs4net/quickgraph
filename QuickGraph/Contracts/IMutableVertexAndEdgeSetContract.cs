@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IMutableVertexAndEdgeSet<,>))]
+#endif
     abstract class IMutableVertexAndEdgeSetContract<TVertex, TEdge>
         : IMutableVertexAndEdgeSet<TVertex, TEdge>
         where TEdge : IEdge<TVertex>
@@ -14,20 +18,23 @@ namespace QuickGraph.Contracts
         bool IMutableVertexAndEdgeSet<TVertex, TEdge>.AddVerticesAndEdge(TEdge edge)
         {
             IMutableVertexAndEdgeSet<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(edge != null);
             Contract.Ensures(ithis.ContainsEdge(edge));
             Contract.Ensures(ithis.AllowParallelEdges || Contract.Result<bool>() == Contract.OldValue(!ithis.ContainsEdge(edge)));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) + (Contract.Result<bool>() ? 1 : 0));
-
+#endif
             return default(bool);
         }
 
         int IMutableVertexAndEdgeSet<TVertex, TEdge>.AddVerticesAndEdgeRange(IEnumerable<TEdge> edges)
         {
             IMutableVertexAndEdgeSet<TVertex, TEdge> ithis = this;
+#if CTR
             Contract.Requires(edges != null);
             Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(edges, edge => edge != null));
             Contract.Ensures(ithis.EdgeCount == Contract.OldValue(ithis.EdgeCount) + Contract.Result<int>());
+#endif
 
             return default(int);
         }

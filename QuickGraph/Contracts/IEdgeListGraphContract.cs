@@ -1,9 +1,13 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Contracts
 {
+#if CTR
     [ContractClassFor(typeof(IEdgeListGraph<,>))]
+#endif
     abstract class IEdgeListGraphContract<TVertex, TEdge>
         : IEdgeListGraph<TVertex, TEdge>
       where TEdge : IEdge<TVertex>  

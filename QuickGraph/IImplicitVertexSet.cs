@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR        
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 
 namespace QuickGraph
@@ -8,7 +10,9 @@ namespace QuickGraph
     /// An implicit set of vertices
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
+#if CTR        
     [ContractClass(typeof(IImplicitVertexSetContract<>))]
+#endif
     public interface IImplicitVertexSet<TVertex>
     {
         /// <summary>
@@ -18,7 +22,9 @@ namespace QuickGraph
         /// <returns>
         /// 	<c>true</c> if the specified vertex contains vertex; otherwise, <c>false</c>.
         /// </returns>
+#if CTR        
         [Pure]
+#endif
         bool ContainsVertex(TVertex vertex);
     }
 }

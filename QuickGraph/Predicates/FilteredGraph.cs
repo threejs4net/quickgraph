@@ -1,5 +1,7 @@
 ﻿using System;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Predicates
 {
@@ -20,9 +22,11 @@ namespace QuickGraph.Predicates
             EdgePredicate<TVertex, TEdge> edgePredicate
             )
         {
+#if CTR
             Contract.Requires(baseGraph != null);
             Contract.Requires(vertexPredicate != null);
             Contract.Requires(edgePredicate != null);
+#endif
 
             this.baseGraph = baseGraph;
             this.vertexPredicate = vertexPredicate;

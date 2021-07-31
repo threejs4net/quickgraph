@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 using QuickGraph.Algorithms.ShortestPath;
 using QuickGraph.Algorithms.Observers;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Algorithms
 {
@@ -26,8 +28,9 @@ namespace QuickGraph.Algorithms
             )
             :base(visitedGraph)
         {
+#if CTR
             Contract.Requires(distances != null);
-
+#endif
             this.dijkstra = new DijkstraShortestPathAlgorithm<TVertex, TEdge>(
                 this.VisitedGraph,
                 distances,

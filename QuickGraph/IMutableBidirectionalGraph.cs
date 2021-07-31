@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.Contracts;
+﻿#if CTR        
+using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Contracts;
 namespace QuickGraph
 {
@@ -7,7 +9,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
     /// <typeparam name="TEdge">type of the edges</typeparam>
+#if CTR        
     [ContractClass(typeof(IMutableBidirectionalGraphContract<,>))]
+#endif
     public interface IMutableBidirectionalGraph<TVertex,TEdge> 
         : IMutableVertexAndEdgeListGraph<TVertex,TEdge>
         , IBidirectionalGraph<TVertex,TEdge>

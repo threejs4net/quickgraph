@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Data
 {
@@ -17,8 +19,9 @@ namespace QuickGraph.Data
 
         internal DataSetGraph(DataSet dataSet)
         {
+#if CTR
             Contract.Requires(dataSet != null);
-
+#endif
             this.dataSet = dataSet;
         }
     }

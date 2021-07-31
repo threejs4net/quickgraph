@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
+
 namespace QuickGraph.Predicates
 {
 #if !SILVERLIGHT
@@ -16,8 +19,10 @@ namespace QuickGraph.Predicates
             IDictionary<TEdge, double> residualCapacities,
             IDictionary<TEdge, TEdge> reversedEdges)
         {
+#if CTR
             Contract.Requires(residualCapacities != null);
             Contract.Requires(reversedEdges != null);
+#endif
             
             this.residualCapacities = residualCapacities;
             this.reversedEdges = reversedEdges;
@@ -47,7 +52,9 @@ namespace QuickGraph.Predicates
 
         public bool Test(TEdge e)
         {
+#if CTR
             Contract.Requires(e != null);
+#endif
             return 0 < this.residualCapacities[reversedEdges[e]];
         }
     }

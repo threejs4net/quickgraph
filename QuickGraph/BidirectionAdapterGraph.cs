@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using QuickGraph.Collections;
 using System.Diagnostics;
 
@@ -25,7 +27,9 @@ namespace QuickGraph
 
         public BidirectionAdapterGraph(IVertexAndEdgeListGraph<TVertex, TEdge> baseGraph)
         {
+#if CTR
             Contract.Requires(baseGraph != null);
+#endif
 
             this.baseGraph = baseGraph;
             this.inEdges = new Dictionary<TVertex, EdgeList<TVertex, TEdge>>(this.baseGraph.VertexCount);
@@ -38,13 +42,17 @@ namespace QuickGraph
             }
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool IsInEdgesEmpty(TVertex v)
         {
             return this.InDegree(v) == 0;
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public int InDegree(TVertex v)
         {
             EdgeList<TVertex, TEdge> edges;
@@ -55,7 +63,9 @@ namespace QuickGraph
         }
 
         static readonly TEdge[] emptyEdges = new TEdge[0];
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public IEnumerable<TEdge> InEdges(TVertex v)
         {
             EdgeList<TVertex, TEdge> edges;
@@ -65,7 +75,9 @@ namespace QuickGraph
                 return emptyEdges;
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool TryGetInEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             EdgeList<TVertex, TEdge> es;
@@ -79,61 +91,81 @@ namespace QuickGraph
             return false;
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public TEdge InEdge(TVertex v, int index)
         {
             return this.inEdges[v][index];
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public int Degree(TVertex v)
         {
             return this.InDegree(v) + this.OutDegree(v);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             return this.baseGraph.ContainsEdge(source, target);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool TryGetEdges(TVertex source, TVertex target, out IEnumerable<TEdge> edges)
         {
             return this.baseGraph.TryGetEdges(source, target, out edges);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
             return this.baseGraph.TryGetEdge(source, target, out edge);
         }
 
-        [Pure] // InterfacePureBug
+#if CTR        
+        [Pure] 
+#endif
         public bool IsOutEdgesEmpty(TVertex v)
         {
             return this.baseGraph.IsOutEdgesEmpty(v);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public int OutDegree(TVertex v)
         {
             return this.baseGraph.OutDegree(v);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
             return this.baseGraph.OutEdges(v);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             return this.baseGraph.TryGetOutEdges(v, out edges);
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public TEdge OutEdge(TVertex v, int index)
         {
             return this.baseGraph.OutEdge(v, index);
@@ -164,7 +196,9 @@ namespace QuickGraph
             get { return this.baseGraph.Vertices; }
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool ContainsVertex(TVertex vertex)
         {
             return this.baseGraph.ContainsVertex(vertex);
@@ -185,7 +219,9 @@ namespace QuickGraph
             get { return this.baseGraph.Edges; }
         }
 
-        [Pure]
+#if CTR        
+        [Pure] 
+#endif
         public bool ContainsEdge(TEdge edge)
         {
             return this.baseGraph.ContainsEdge(edge);

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR        
 using System.Diagnostics.Contracts;
 using QuickGraph.Contracts;
+#endif
 
 namespace QuickGraph
 {
@@ -10,7 +12,9 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
     /// <typeparam name="TEdge">type of the edges</typeparam>
+#if CTR        
     [ContractClass(typeof(IEdgeListGraphContract<,>))]
+#endif
     public interface IEdgeListGraph<TVertex, TEdge> 
         : IGraph<TVertex, TEdge>
         , IEdgeSet<TVertex, TEdge>

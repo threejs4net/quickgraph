@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if CTR
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph.Algorithms.Observers
 {
     /// <summary>
@@ -27,7 +28,9 @@ namespace QuickGraph.Algorithms.Observers
 
         public EdgeRecorderObserver(IList<TEdge> edges)
         {
+#if CTR
             Contract.Requires(edges != null);
+#endif
 
             this.edges = edges;
         }
@@ -50,8 +53,9 @@ namespace QuickGraph.Algorithms.Observers
 
         private void RecordEdge(TEdge args)
         {
+#if CTR
             Contract.Requires(args != null);
-
+#endif
             this.Edges.Add(args);
         }
     }

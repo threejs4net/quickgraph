@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -60,7 +62,9 @@ namespace QuickGraph
             IBidirectionalGraph<TVertex, TEdge> visitedGraph
             )
         {
+#if CTR
             Contract.Requires(visitedGraph != null);
+#endif
 
             this.vertexEdges = new Dictionary<TVertex, InOutEdges>(visitedGraph.VertexCount);
             this.edgeCount = visitedGraph.EdgeCount;
@@ -77,8 +81,10 @@ namespace QuickGraph
             int edgeCount
             )
         {
+#if CTR
             Contract.Requires(vertexEdges != null);
             Contract.Requires(edgeCount >= 0);
+#endif
 
             this.vertexEdges = vertexEdges;
             this.edgeCount = edgeCount;
@@ -190,7 +196,11 @@ namespace QuickGraph
 
             TEdge[] edges;
             if (!io.TryGetOutEdges(out edges))
-                Contract.Assert(false);
+            {
+#if CTR
+Contract.Assert(false);
+#endif
+            }
 
             return edges[index];
         }
@@ -342,7 +352,11 @@ namespace QuickGraph
 
             TEdge[] edges;
             if (!io.TryGetOutEdges(out edges))
-                Contract.Assert(false);
+            {
+#if CTR
+Contract.Assert(false);
+#endif
+            }
 
             return edges[index];
         }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if CTR        
 using System.Diagnostics.Contracts;
-
+#endif
 namespace QuickGraph
 {
     /// <summary>
@@ -29,12 +30,14 @@ namespace QuickGraph
              bool allowParallelEdges)
             : base(tryGetAdjacentEdges, allowParallelEdges)
         {
+#if CTR        
             Contract.Requires(vertices != null);
             Contract.Requires(Enumerable.All(vertices, v =>
             {
                 IEnumerable<TEdge> edges;
                 return tryGetAdjacentEdges(v, out edges);
             }));
+#endif
             this.vertices = vertices;
         }
 

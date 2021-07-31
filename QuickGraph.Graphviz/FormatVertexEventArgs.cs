@@ -1,6 +1,8 @@
 ﻿using System;
 using QuickGraph.Graphviz.Dot;
+#if CTR
 using System.Diagnostics.Contracts;
+#endif
 
 namespace QuickGraph.Graphviz
 {
