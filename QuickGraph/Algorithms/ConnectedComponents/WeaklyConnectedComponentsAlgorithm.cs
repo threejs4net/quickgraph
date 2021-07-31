@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
-using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif
-using System.Diagnostics;
-using System.Linq;
 
 namespace QuickGraph.Algorithms.ConnectedComponents
 {

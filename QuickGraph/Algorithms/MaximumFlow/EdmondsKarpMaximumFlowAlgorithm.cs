@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms.Observers;
-using QuickGraph.Predicates;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Services;
+using QuickGraph.Predicates;
+
 #if CTR
 using System.Diagnostics.Contracts;
 #endif

@@ -1,5 +1,4 @@
-﻿using System;
-using QuickGraph.Algorithms.Services;
+﻿using QuickGraph.Algorithms.Services;
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {

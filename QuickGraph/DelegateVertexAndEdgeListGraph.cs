@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 #if CTR        
 using System.Diagnostics.Contracts;
 #endif
-using System.Linq;
 
 namespace QuickGraph
 {

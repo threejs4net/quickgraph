@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif
-using System.Collections.Generic;
 
 namespace QuickGraph.Algorithms
 {

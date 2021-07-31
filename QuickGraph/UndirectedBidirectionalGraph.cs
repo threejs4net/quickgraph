@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
+
 #if CTR
 using System.Diagnostics.Contracts;
 #endif

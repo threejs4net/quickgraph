@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using QuickGraph.Algorithms.Search;
+
 #if CTR
 using System.Diagnostics.Contracts;
 #endif

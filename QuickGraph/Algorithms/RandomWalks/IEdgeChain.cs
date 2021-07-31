@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace QuickGraph.Algorithms.RandomWalks
 {    
     public interface IEdgeChain<TVertex, TEdge>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuickGraph
+﻿namespace QuickGraph
 {
     /// <summary>
     /// The handler for events involving two edges

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 
-using QuickGraph.Algorithms.Observers;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif

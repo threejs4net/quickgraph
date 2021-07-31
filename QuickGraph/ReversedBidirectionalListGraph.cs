@@ -4,7 +4,6 @@ using System.Diagnostics;
 #if CTR        
 using System.Diagnostics.Contracts;
 #endif
-using System.Linq;
 
 namespace QuickGraph
 {

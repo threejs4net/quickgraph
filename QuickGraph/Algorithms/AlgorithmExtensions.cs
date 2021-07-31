@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using QuickGraph.Algorithms.Condensation;
-using QuickGraph.Algorithms.Search;
+using QuickGraph.Algorithms.ConnectedComponents;
+using QuickGraph.Algorithms.MaximumFlow;
+using QuickGraph.Algorithms.MinimumSpanningTree;
 using QuickGraph.Algorithms.Observers;
+using QuickGraph.Algorithms.RandomWalks;
+using QuickGraph.Algorithms.RankedShortestPath;
+using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.ShortestPath;
+using QuickGraph.Algorithms.TopologicalSort;
+using QuickGraph.Collections;
 #if CTR
 using System.Diagnostics.Contracts;
 using QuickGraph.Contracts;
 #endif
-using QuickGraph.Algorithms.RandomWalks;
-using QuickGraph.Collections;
-using System.Linq;
-using QuickGraph.Algorithms.MinimumSpanningTree;
-using QuickGraph.Algorithms.RankedShortestPath;
-using System.Reflection;
-using QuickGraph.Algorithms.ConnectedComponents;
-using System.Diagnostics;
-using QuickGraph.Algorithms.TopologicalSort;
-using QuickGraph.Algorithms.MaximumFlow;
 
 namespace QuickGraph.Algorithms
 {

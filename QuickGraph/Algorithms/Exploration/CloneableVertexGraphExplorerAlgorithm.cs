@@ -1,9 +1,8 @@
 ﻿#if !SILVERLIGHT
 using System;
 using System.Collections.Generic;
-
-using QuickGraph.Predicates;
 using QuickGraph.Algorithms.Services;
+
 #if CTR
 using System.Diagnostics.Contracts;
 #endif

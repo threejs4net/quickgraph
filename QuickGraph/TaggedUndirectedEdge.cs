@@ -3,7 +3,6 @@ using System.Diagnostics;
 #if CTR        
 using System.Diagnostics.Contracts;
 #endif
-using System.Collections.Generic;
 
 namespace QuickGraph
 {

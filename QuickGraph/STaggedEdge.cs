@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 #if CTR        
 using System.Diagnostics.Contracts;
 #endif
-using System.Runtime.InteropServices;
-using System.Diagnostics;
 
 namespace QuickGraph
 {

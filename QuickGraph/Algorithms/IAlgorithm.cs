@@ -1,6 +1,4 @@
-﻿using System;
-using QuickGraph.Algorithms.Services;
-#if CTR
+﻿#if CTR
 using System.Diagnostics.Contracts;
 #endif
 namespace QuickGraph.Algorithms

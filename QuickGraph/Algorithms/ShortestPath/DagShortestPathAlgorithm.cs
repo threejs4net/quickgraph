@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using QuickGraph.Algorithms.Search;
-using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
 
 namespace QuickGraph.Algorithms.ShortestPath

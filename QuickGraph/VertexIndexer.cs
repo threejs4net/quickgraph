@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-#if CTR
+﻿#if CTR
 using System.Diagnostics.Contracts;
 #endif
 

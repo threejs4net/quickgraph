@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuickGraph
+﻿namespace QuickGraph
 {
 #if NET20
     public delegate void Action<T>(T value);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Predicates;
-using QuickGraph.Collections;
 
 namespace QuickGraph.Algorithms.Ranking
 {

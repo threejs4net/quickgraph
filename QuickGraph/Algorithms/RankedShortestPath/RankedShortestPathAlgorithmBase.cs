@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
-using QuickGraph.Algorithms.ShortestPath;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif
-using System.Linq;
 
 namespace QuickGraph.Algorithms.RankedShortestPath
 {

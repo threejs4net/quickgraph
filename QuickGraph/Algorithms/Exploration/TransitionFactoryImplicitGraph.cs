@@ -1,11 +1,10 @@
 ﻿#if !SILVERLIGHT
 using System;
 using System.Collections.Generic;
-using QuickGraph.Predicates;
+using QuickGraph.Collections;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif
-using QuickGraph.Collections;
 
 namespace QuickGraph.Algorithms.Exploration
 {

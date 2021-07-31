@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms.ConnectedComponents;
 
 namespace QuickGraph.Algorithms.Condensation

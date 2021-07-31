@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 #if CTR
 using System.Diagnostics.Contracts;
 using QuickGraph.Contracts;

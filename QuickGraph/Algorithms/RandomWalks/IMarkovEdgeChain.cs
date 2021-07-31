@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace QuickGraph.Algorithms.RandomWalks
 {
     public interface IMarkovEdgeChain<TVertex,TEdge> 

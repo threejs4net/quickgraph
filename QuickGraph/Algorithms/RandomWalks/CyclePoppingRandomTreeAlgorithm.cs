@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using QuickGraph.Algorithms.Services;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif
-using System.Linq;
 
 namespace QuickGraph.Algorithms.RandomWalks
 {

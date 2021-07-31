@@ -1,4 +1,5 @@
 ﻿using System;
+
 #if CTR        
 using System.Diagnostics.Contracts;
 using QuickGraph.Contracts;

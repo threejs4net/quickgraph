@@ -1,6 +1,7 @@
 ﻿using System;
-using QuickGraph.Algorithms.Services;
 using System.Collections.Generic;
+using QuickGraph.Algorithms.Services;
+
 #if CTR
 using System.Diagnostics.Contracts;
 #endif

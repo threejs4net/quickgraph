@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using QuickGraph.Collections;
 #if CTR
 using System.Diagnostics.Contracts;
 using QuickGraph.Contracts;
 #endif
-using QuickGraph.Collections;
 
 namespace QuickGraph
 {

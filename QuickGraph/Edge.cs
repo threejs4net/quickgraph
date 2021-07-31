@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+
 #if CTR        
 using System.Diagnostics.Contracts;
 #endif

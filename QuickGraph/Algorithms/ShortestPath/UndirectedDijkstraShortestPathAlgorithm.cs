@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using QuickGraph.Algorithms.Search;
-using QuickGraph.Algorithms.Observers;
-using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
+using QuickGraph.Collections;
 #if CTR
 using System.Diagnostics.Contracts;
 #endif
-using System.Diagnostics;
 
 namespace QuickGraph.Algorithms.ShortestPath
 {
