@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 using System.Diagnostics;
 #if CTR
 using System.Diagnostics.Contracts;
-#endif
 using QuickGraph.Contracts;
+#endif
 using QuickGraph.Collections;
 using System.Linq;
 

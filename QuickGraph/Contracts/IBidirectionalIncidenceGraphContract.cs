@@ -16,7 +16,10 @@ namespace QuickGraph.Contracts
         where TEdge : IEdge<TVertex>
     {
         #region IBidirectionalImplicitGraph<TVertex,TEdge> Members
+#if CTR
         [Pure]
+#endif
+
         bool IBidirectionalIncidenceGraph<TVertex, TEdge>.IsInEdgesEmpty(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
@@ -28,7 +31,10 @@ namespace QuickGraph.Contracts
             return default(bool);
         }
 
+#if CTR
         [Pure]
+#endif
+
         int IBidirectionalIncidenceGraph<TVertex, TEdge>.InDegree(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
@@ -40,7 +46,10 @@ namespace QuickGraph.Contracts
             return default(int);
         }
 
+#if CTR
         [Pure]
+#endif
+
         IEnumerable<TEdge> IBidirectionalIncidenceGraph<TVertex, TEdge>.InEdges(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
@@ -58,7 +67,10 @@ namespace QuickGraph.Contracts
             return default(IEnumerable<TEdge>);
         }
 
+#if CTR
         [Pure]
+#endif
+
         bool IBidirectionalIncidenceGraph<TVertex, TEdge>.TryGetInEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
@@ -78,7 +90,10 @@ namespace QuickGraph.Contracts
             return default(bool);
         }
 
+#if CTR
         [Pure]
+#endif
+
         TEdge IBidirectionalIncidenceGraph<TVertex, TEdge>.InEdge(TVertex v, int index)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;
@@ -91,7 +106,10 @@ namespace QuickGraph.Contracts
             return default(TEdge);
         }
 
+#if CTR
         [Pure]
+#endif
+
         int IBidirectionalIncidenceGraph<TVertex, TEdge>.Degree(TVertex v)
         {
             IBidirectionalIncidenceGraph<TVertex, TEdge> ithis = this;

@@ -78,7 +78,10 @@ namespace QuickGraph.Contracts
         #endregion
 
         #region IImplicitUndirectedGraph<TVertex,TEdge> Members
+#if CTR
         [Pure]
+#endif
+
         EdgeEqualityComparer<TVertex, TEdge> IImplicitUndirectedGraph<TVertex, TEdge>.EdgeEqualityComparer
         {
             get

@@ -13,7 +13,10 @@ namespace QuickGraph.Contracts
     abstract class IImplicitVertexSetContract<TVertex>
         : IImplicitVertexSet<TVertex>
     {
+#if CTR
         [Pure]
+#endif
+
         bool IImplicitVertexSet<TVertex>.ContainsVertex(TVertex vertex)
         {
             IImplicitVertexSet<TVertex> ithis = this;

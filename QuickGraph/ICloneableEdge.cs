@@ -1,8 +1,8 @@
 ﻿using System;
 #if CTR        
 using System.Diagnostics.Contracts;
-#endif
 using QuickGraph.Contracts;
+#endif
 
 namespace QuickGraph
 {

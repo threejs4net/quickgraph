@@ -13,7 +13,10 @@ namespace QuickGraph.Contracts
     /// </summary>
     public static class GraphContract
     {
+#if CTR
         [Pure]
+#endif
+
         public static bool VertexCountEqual<TVertex>(
 #if !NET20
             this 
@@ -28,7 +31,10 @@ namespace QuickGraph.Contracts
             return left.VertexCount == right.VertexCount;
         }
 
+#if CTR
         [Pure]
+#endif
+
         public static bool EdgeCountEqual<TVertex, TEdge>(
 #if !NET20
             this 
@@ -44,7 +50,10 @@ namespace QuickGraph.Contracts
             return left.EdgeCount == right.EdgeCount;
         }
 
+#if CTR
         [Pure]
+#endif
+
         public static bool InVertexSet<TVertex>(
             IVertexSet<TVertex> g, 
             TVertex v)
@@ -57,7 +66,10 @@ namespace QuickGraph.Contracts
             return g.ContainsVertex(v);
         }
 
+#if CTR
         [Pure]
+#endif
+
         public static bool InVertexSet<TVertex, TEdge>(
             IEdgeListGraph<TVertex, TEdge> g,
             TEdge e)
@@ -72,7 +84,10 @@ namespace QuickGraph.Contracts
                 && InVertexSet<TVertex>(g, e.Target);
         }
 
+#if CTR
         [Pure]
+#endif
+
         public static bool InEdgeSet<TVertex, TEdge>(
             IEdgeListGraph<TVertex, TEdge> g,
             TEdge e)

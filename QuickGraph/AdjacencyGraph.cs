@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 #if CTR
 using System.Diagnostics.Contracts;
-#endif
 using QuickGraph.Contracts;
+#endif
 using QuickGraph.Collections;
 
 namespace QuickGraph

@@ -8,7 +8,14 @@
     <OutputPath>..\bin\Debug\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts\**" />
+    <EmbeddedResource Remove="Contracts\**" />
+    <None Remove="Contracts\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Algorithms\Search\HeightFirstSearchAlgorithm.cs" />

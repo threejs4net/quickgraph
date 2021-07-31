@@ -54,7 +54,10 @@ namespace QuickGraph.Contracts
             }
         }
 
+#if CTR
         [Pure]
+#endif
+
         bool IEdgeSet<TVertex, TEdge>.ContainsEdge(TEdge edge)
         {
             IEdgeSet<TVertex, TEdge> ithis = this;

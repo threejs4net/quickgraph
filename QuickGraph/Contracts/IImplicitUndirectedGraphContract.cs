@@ -16,7 +16,10 @@ namespace QuickGraph.Contracts
         where TEdge : IEdge<TVertex>
     {
         #region IImplicitUndirectedGraph<TVertex,TEdge> Members
+#if CTR
         [Pure]
+#endif
+
         EdgeEqualityComparer<TVertex, TEdge> IImplicitUndirectedGraph<TVertex, TEdge>.EdgeEqualityComparer
         {
             get
@@ -28,7 +31,10 @@ namespace QuickGraph.Contracts
             }
         }
 
+#if CTR
         [Pure]
+#endif
+
         IEnumerable<TEdge> IImplicitUndirectedGraph<TVertex, TEdge>.AdjacentEdges(TVertex v)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
@@ -49,7 +55,10 @@ namespace QuickGraph.Contracts
             return default(IEnumerable<TEdge>);
         }
 
+#if CTR
         [Pure]
+#endif
+
         int IImplicitUndirectedGraph<TVertex, TEdge>.AdjacentDegree(TVertex v)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
@@ -61,7 +70,10 @@ namespace QuickGraph.Contracts
             return default(int);
         }
 
+#if CTR
         [Pure]
+#endif
+
         bool IImplicitUndirectedGraph<TVertex, TEdge>.IsAdjacentEdgesEmpty(TVertex v)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
@@ -73,7 +85,10 @@ namespace QuickGraph.Contracts
             return default(bool);
         }
 
+#if CTR
         [Pure]
+#endif
+
         TEdge IImplicitUndirectedGraph<TVertex, TEdge>.AdjacentEdge(TVertex v, int index)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
@@ -89,7 +104,10 @@ namespace QuickGraph.Contracts
             return default(TEdge);
         }
 
+#if CTR
         [Pure]
+#endif
+
         bool IImplicitUndirectedGraph<TVertex, TEdge>.TryGetEdge(TVertex source, TVertex target, out TEdge edge)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;
@@ -101,7 +119,10 @@ namespace QuickGraph.Contracts
             return default(bool);
         }
 
+#if CTR
         [Pure]
+#endif
+
         bool IImplicitUndirectedGraph<TVertex, TEdge>.ContainsEdge(TVertex source, TVertex target)
         {
             IImplicitUndirectedGraph<TVertex, TEdge> ithis = this;

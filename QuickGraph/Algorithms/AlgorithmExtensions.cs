@@ -6,8 +6,8 @@ using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.ShortestPath;
 #if CTR
 using System.Diagnostics.Contracts;
-#endif
 using QuickGraph.Contracts;
+#endif
 using QuickGraph.Algorithms.RandomWalks;
 using QuickGraph.Collections;
 using System.Linq;

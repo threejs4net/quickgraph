@@ -1,5 +1,5 @@
-﻿using QuickGraph.Contracts;
-#if CTR        
+﻿#if CTR        
+using QuickGraph.Contracts;
 using System.Diagnostics.Contracts;
 #endif
 namespace QuickGraph

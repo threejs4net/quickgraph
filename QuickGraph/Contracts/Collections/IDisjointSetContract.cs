@@ -77,7 +77,10 @@ namespace QuickGraph.Collections.Contracts
             return default(bool);
         }
 
+#if CTR
         [Pure]
+#endif
+
         bool IDisjointSet<T>.Contains(T value)
         {
             return default(bool);
